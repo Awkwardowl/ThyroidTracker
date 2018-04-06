@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,19 +35,36 @@ import java.util.GregorianCalendar;
  * Created by Finley on 04/01/2018.
  */
 
+
+
 public class Tab_b extends Fragment {
+
+    ViewPager mPager;
+    FragmentPagerAdapter adapterViewPager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View Fragment = inflater.inflate(R.layout.tab_b, container, false);
 
+        ViewPager viewPager = (ViewPager) Fragment.findViewById(R.id.TypeSelector);
+        adapterViewPager = new MyPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(adapterViewPager);
+
+        Input_Energy input_energy = new Input_Energy();
+        FragmentManager manager = getChildFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.InputLayout, input_energy, input_energy.getTag())
+                .commit();
+
+
+
         Date date = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         Context context = getContext();
-        Toast toast = Toast.makeText(context,date +","+ dayOfWeek,Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(context, date + "," + dayOfWeek, Toast.LENGTH_LONG);
         toast.show();
 
         Calendar now = Calendar.getInstance();
@@ -53,42 +73,41 @@ public class Tab_b extends Fragment {
 
         String[] days = new String[7];
         int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; //add 2 if your week start on monday
-        now.add(Calendar.DAY_OF_MONTH, delta );
-        for (int i = 0; i < 7; i++)
-        {
+        now.add(Calendar.DAY_OF_MONTH, delta);
+        for (int i = 0; i < 7; i++) {
             days[i] = format.format(now.getTime());
             now.add(Calendar.DAY_OF_MONTH, 1);
         }
         System.out.println(Arrays.toString(days));
 
 
-                final TextView Sunday = (TextView) Fragment.findViewById(R.id.Sunday);
-                Sunday.setText(days[6]);
-                Sunday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Sunday = (TextView) Fragment.findViewById(R.id.Sunday);
+        Sunday.setText(days[6]);
+        Sunday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
-                final TextView Monday = (TextView) Fragment.findViewById(R.id.Monday);
-                Monday.setText(days[0]);
-                Monday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Monday = (TextView) Fragment.findViewById(R.id.Monday);
+        Monday.setText(days[0]);
+        Monday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
-                final TextView Tuesday = (TextView) Fragment.findViewById(R.id.Tuesday);
-                Tuesday.setText(days[1]);
-                Tuesday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Tuesday = (TextView) Fragment.findViewById(R.id.Tuesday);
+        Tuesday.setText(days[1]);
+        Tuesday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
-                final TextView Wednesday = (TextView) Fragment.findViewById(R.id.Wednesday);
-                Wednesday.setText(days[2]);
-                Wednesday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Wednesday = (TextView) Fragment.findViewById(R.id.Wednesday);
+        Wednesday.setText(days[2]);
+        Wednesday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
-                final TextView Thursday = (TextView) Fragment.findViewById(R.id.Thursday);
-                Thursday.setText(days[3]);
-                Thursday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Thursday = (TextView) Fragment.findViewById(R.id.Thursday);
+        Thursday.setText(days[3]);
+        Thursday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
-                final TextView Friday = (TextView) Fragment.findViewById(R.id.Friday);
-                Friday.setText(days[4]);
-                Friday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Friday = (TextView) Fragment.findViewById(R.id.Friday);
+        Friday.setText(days[4]);
+        Friday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
-                final TextView Saturday = (TextView) Fragment.findViewById(R.id.Saturday);
-                Saturday.setText(days[5]);
-                Saturday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Saturday = (TextView) Fragment.findViewById(R.id.Saturday);
+        Saturday.setText(days[5]);
+        Saturday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
 
         switch (dayOfWeek) {
             case 1:
@@ -114,48 +133,78 @@ public class Tab_b extends Fragment {
                 break;
         }
 
-        final Button ButtonA = (Button) Fragment.findViewById(R.id.buttonA);
-        final Button ButtonB = (Button) Fragment.findViewById(R.id.buttonB);
-        final Button ButtonC = (Button) Fragment.findViewById(R.id.buttonC);
-        final Button ButtonD = (Button) Fragment.findViewById(R.id.buttonD);
-
-
-
-        ImageButton EnergyLogo = (ImageButton) Fragment.findViewById(R.id.EnergyLogo);
-        final TextView textView = (TextView) Fragment.findViewById(R.id.Title);
-        EnergyLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText("Energy Levels");
-                ButtonA.setText("High Energy");
-                ButtonA.setBackgroundResource(R.drawable.goodenergy);
-                ButtonB.setText("Medium Energy");
-                ButtonB.setBackgroundResource(R.drawable.okayenergy);
-                ButtonC.setText("Low Energy");
-                ButtonC.setBackgroundResource(R.drawable.badenergy);
-                ButtonD.setText("No Energy");
-            }
-        });
-
-        ImageButton SleepLogo = (ImageButton) Fragment.findViewById(R.id.SleepLogo);
-        SleepLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText("Sleep Quality");
-                ButtonA.setText("Slept Well");
-                ButtonA.setBackgroundResource(R.drawable.goodsleep);
-                ButtonB.setText("Slept Okay");
-                ButtonB.setBackgroundResource(R.drawable.okaysleep);
-                ButtonC.setText("Slept Poorly");
-                ButtonC.setBackgroundResource(R.drawable.badsleep);
-                ButtonD.setText("Slept extremely poorly.");
-            }
-        });
+//        final Button ButtonA = (Button) Fragment.findViewById(R.id.buttonA);
+//        final Button ButtonB = (Button) Fragment.findViewById(R.id.buttonB);
+//        final Button ButtonC = (Button) Fragment.findViewById(R.id.buttonC);
+//        final Button ButtonD = (Button) Fragment.findViewById(R.id.buttonD);
+//
+//
+//        ImageButton EnergyLogo = (ImageButton) Fragment.findViewById(R.id.EnergyLogo);
+//        final TextView textView = (TextView) Fragment.findViewById(R.id.Title);
+//        EnergyLogo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                textView.setText("Energy Levels");
+//                ButtonA.setText("High Energy");
+//                ButtonA.setBackgroundResource(R.drawable.goodenergy);
+//                ButtonB.setText("Medium Energy");
+//                ButtonB.setBackgroundResource(R.drawable.okayenergy);
+//                ButtonC.setText("Low Energy");
+//                ButtonC.setBackgroundResource(R.drawable.badenergy);
+//                ButtonD.setText("No Energy");
+//            }
+//        });
+//
+//        ImageButton SleepLogo = (ImageButton) Fragment.findViewById(R.id.SleepLogo);
+//        SleepLogo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                textView.setText("Sleep Quality");
+//                ButtonA.setText("Slept Well");
+//                ButtonA.setBackgroundResource(R.drawable.goodsleep);
+//                ButtonB.setText("Slept Okay");
+//                ButtonB.setBackgroundResource(R.drawable.okaysleep);
+//                ButtonC.setText("Slept Poorly");
+//                ButtonC.setBackgroundResource(R.drawable.badsleep);
+//                ButtonD.setText("Slept extremely poorly.");
+//            }
+//        });
 
 
         return Fragment;
     }
 
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
 
+        private static int Num_Items = 2;
 
+        public MyPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: // Fragment # 0 - This will show FirstFragment
+//                    return trio_a.newInstance(0, "Page # 1");
+                    return trio_a.newInstance();
+                case 1: // Fragment # 0 - This will show FirstFragment different title
+//                    return trio_b.newInstance(1, "Page # 2");
+                    return trio_b.newInstance();
+                default:
+                    return null;
+            }
+        }
+
+        // Returns the page title for the top indicator
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Page " + position;
+        }
+
+        @Override
+        public int getCount() {
+            return Num_Items;
+        }
+    }
 }

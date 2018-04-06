@@ -9,12 +9,13 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/TableLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="75dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="13dp"
         android:layout_marginStart="8dp"
         android:orientation="vertical"
         android:paddingTop="5dp"
         android:stretchColumns="0,1,2,3,4,5,6"
+        app:layout_constraintBottom_toTopOf="@+id/viewPager2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -145,171 +146,19 @@
         </TableRow>
     </TableLayout>
 
-    <RelativeLayout
-        android:layout_width="390dp"
-        android:layout_height="144dp"
-        android:layout_marginBottom="390dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/TypeSelector"
+        android:layout_width="393dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="389dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <HorizontalScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="0dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/EnergyLogo"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/energylogo"
-                    app:srcCompat="@drawable/energylogo" />
-
-                <ImageButton
-                    android:id="@+id/SleepLogo"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/sleeplogo"
-                    app:srcCompat="@drawable/sleeplogo" />
-
-                <ImageButton
-                    android:id="@+id/EmoteinalLogo"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/emotionlogo"
-                    app:srcCompat="@drawable/emotionlogo" />
-
-                <ImageButton
-                    android:id="@+id/AlcoholLogo"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/energylogo"
-                    app:srcCompat="@drawable/energylogo" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
-    </RelativeLayout>
-
-    <RelativeLayout
-
-        android:layout_width="fill_parent"
-        android:layout_height="347dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="5.0dip"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="0.0dip"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/buttonA"
-                    android:layout_width="165.0dip"
-                    android:layout_height="140.0dip"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="35.0dip"
-                    android:layout_marginLeft="5.0dip"
-                    android:layout_marginRight="5.0dip"
-                    android:layout_marginTop="10.0dip"
-                    android:background="@drawable/goodsleep"
-                    android:padding="5.0dip"
-                    android:textAlignment="gravity"
-                    android:textColor="#ffffffff"
-                    android:textSize="20.0sp" />
-
-                <Button
-                    android:id="@+id/buttonC"
-                    android:layout_width="165.0dip"
-                    android:layout_height="140.0dip"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="35.0dip"
-                    android:layout_marginLeft="5.0dip"
-                    android:layout_marginRight="5.0dip"
-                    android:background="@drawable/badsleep"
-                    android:padding="5.0dip"
-                    android:textAlignment="gravity"
-                    android:textColor="#ffffffff"
-                    android:textSize="20.0sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/buttonB"
-                    android:layout_width="165.0dip"
-                    android:layout_height="140.0dip"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15.0dip"
-                    android:layout_marginLeft="5.0dip"
-                    android:layout_marginRight="5.0dip"
-                    android:layout_marginTop="10.0dip"
-                    android:background="@drawable/okaysleep"
-                    android:padding="0.0dip"
-                    android:textAlignment="gravity"
-                    android:textColor="#ffffffff"
-                    android:textSize="20.0sp" />
-
-                <Button
-                    android:id="@+id/buttonD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="118.0dip"
-                    android:layout_gravity="center"
-                    android:layout_margin="20.0dip"
-                    android:background="#ffffff00"
-                    android:padding="22.0dip"
-                    android:text="Button 4"
-                    android:textAlignment="gravity"
-                    android:textColor="#ffffffff"
-                    android:textSize="20.0sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+        app:layout_constraintTop_toBottomOf="@+id/TableLayout1" />
 
 
     <TextView
@@ -327,4 +176,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/InputLayout"
+        android:layout_width="0dp"
+        android:layout_height="340dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TableLayout1"
+        app:layout_constraintVertical_bias="1.0">
+
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
