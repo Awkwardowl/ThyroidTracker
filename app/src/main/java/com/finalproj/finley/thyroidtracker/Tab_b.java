@@ -7,12 +7,16 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,7 @@ public class Tab_b extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View Fragment = inflater.inflate(R.layout.tab_b, container, false);
+
         Date date = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(date);
@@ -109,27 +114,44 @@ public class Tab_b extends Fragment {
                 break;
         }
 
-//        CalendarView simpleCalendarView = (CalendarView) Fragment.findViewById(R.id.simpleCalendarView); // get the reference of CalendarView
-//            simpleCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
-//            {
-//                @Override
-//                public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
-//                {
-//                    Context context = getContext();
-//                    Toast toast = Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT);
-//                    toast.show();
-//                    Intent intent = new Intent(context,InputActivity.class);
-//                    context.startActivity(intent);
-//                }
-//            });
-//
-//        button button = (button)Fragment.findViewById(R.id.button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Code here
-//            }
-//        });
+        final Button ButtonA = (Button) Fragment.findViewById(R.id.buttonA);
+        final Button ButtonB = (Button) Fragment.findViewById(R.id.buttonB);
+        final Button ButtonC = (Button) Fragment.findViewById(R.id.buttonC);
+        final Button ButtonD = (Button) Fragment.findViewById(R.id.buttonD);
+
+
+
+        ImageButton EnergyLogo = (ImageButton) Fragment.findViewById(R.id.EnergyLogo);
+        final TextView textView = (TextView) Fragment.findViewById(R.id.Title);
+        EnergyLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("Energy Levels");
+                ButtonA.setText("High Energy");
+                ButtonA.setBackgroundResource(R.drawable.goodenergy);
+                ButtonB.setText("Medium Energy");
+                ButtonB.setBackgroundResource(R.drawable.okayenergy);
+                ButtonC.setText("Low Energy");
+                ButtonC.setBackgroundResource(R.drawable.badenergy);
+                ButtonD.setText("No Energy");
+            }
+        });
+
+        ImageButton SleepLogo = (ImageButton) Fragment.findViewById(R.id.SleepLogo);
+        SleepLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("Sleep Quality");
+                ButtonA.setText("Slept Well");
+                ButtonA.setBackgroundResource(R.drawable.goodsleep);
+                ButtonB.setText("Slept Okay");
+                ButtonB.setBackgroundResource(R.drawable.okaysleep);
+                ButtonC.setText("Slept Poorly");
+                ButtonC.setBackgroundResource(R.drawable.badsleep);
+                ButtonD.setText("Slept extremely poorly.");
+            }
+        });
+
 
         return Fragment;
     }
