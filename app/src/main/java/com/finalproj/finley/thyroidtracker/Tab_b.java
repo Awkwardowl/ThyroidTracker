@@ -40,23 +40,45 @@ import java.util.GregorianCalendar;
 public class Tab_b extends Fragment {
 
     ViewPager mPager;
+    ViewPager inputPager;
     FragmentPagerAdapter adapterViewPager;
+    FragmentPagerAdapter adapterViewPager2;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View Fragment = inflater.inflate(R.layout.tab_b, container, false);
 
-        ViewPager viewPager = (ViewPager) Fragment.findViewById(R.id.TypeSelector);
-        adapterViewPager = new MyPagerAdapter(getChildFragmentManager());
+        final ViewPager viewPager = (ViewPager) Fragment.findViewById(R.id.TypeSelector);
+        adapterViewPager = new PageAdapterSelector(getChildFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 
-        Input_Energy input_energy = new Input_Energy();
-        FragmentManager manager = getChildFragmentManager();
-        manager.beginTransaction()
-                .replace(R.id.InputLayout, input_energy, input_energy.getTag())
-                .commit();
+        ViewPager viewPager2 = (ViewPager) Fragment.findViewById(R.id.InputSelector);
+        adapterViewPager2 = new PagerAdapterInput(getChildFragmentManager());
+        viewPager2.setAdapter(adapterViewPager2);
 
+//        Input_Energy input_energy = new Input_Energy();
+//        FragmentManager manager = getChildFragmentManager();
+//        manager.beginTransaction()
+//                .replace(R.id.InputLayout, input_energy, input_energy.getTag())
+//                .commit();
+
+        viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                viewPager.setCurrentItem(1);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
         Date date = new Date();
@@ -174,11 +196,11 @@ public class Tab_b extends Fragment {
         return Fragment;
     }
 
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
+    public static class PageAdapterSelector extends FragmentPagerAdapter {
 
         private static int Num_Items = 2;
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        public PageAdapterSelector(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -191,6 +213,43 @@ public class Tab_b extends Fragment {
                 case 1: // Fragment # 0 - This will show FirstFragment different title
 //                    return trio_b.newInstance(1, "Page # 2");
                     return trio_b.newInstance();
+                default:
+                    return null;
+            }
+        }
+
+        // Returns the page title for the top indicator
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Page " + position;
+        }
+
+        @Override
+        public int getCount() {
+            return Num_Items;
+        }
+    }
+
+
+    //BottomHalfViewPager --------------------------------------
+
+
+
+    public static class PagerAdapterInput extends FragmentPagerAdapter {
+
+        private static int Num_Items = 2;
+
+        public PagerAdapterInput(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: // Fragment # 0 - This will show FirstFragment
+                    return energy_input.newInstance();
+                case 1: // Fragment # 0 - This will show FirstFragment different title
+                    return sleep_input.newInstance();
                 default:
                     return null;
             }
