@@ -198,7 +198,7 @@ public class Tab_b extends Fragment {
 
     public static class PageAdapterSelector extends FragmentPagerAdapter {
 
-        private static int Num_Items = 2;
+        private static int Num_Items = 6;
 
         public PageAdapterSelector(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -213,6 +213,18 @@ public class Tab_b extends Fragment {
                 case 1: // Fragment # 0 - This will show FirstFragment different title
 //                    return trio_b.newInstance(1, "Page # 2");
                     return trio_b.newInstance();
+                case 2: // Fragment # 0 - This will show FirstFragment different title
+//                    return trio_b.newInstance(1, "Page # 2");
+                    return trio_c.newInstance();
+                case 3: // Fragment # 0 - This will show FirstFragment different title
+//                    return trio_b.newInstance(1, "Page # 2");
+                    return trio_d.newInstance();
+                case 4: // Fragment # 0 - This will show FirstFragment different title
+//                    return trio_b.newInstance(1, "Page # 2");
+                    return trio_e.newInstance();
+                case 5: // Fragment # 0 - This will show FirstFragment different title
+//                    return trio_b.newInstance(1, "Page # 2");
+                    return trio_f.newInstance();
                 default:
                     return null;
             }

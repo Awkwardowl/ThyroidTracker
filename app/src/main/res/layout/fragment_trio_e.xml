@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.finalproj.finley.thyroidtracker.trio_b">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/SleepLogo"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_lossoflibido"/>
+
+        <ImageButton
+            android:id="@+id/EmoteinalLogo"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_pinsandneedles"/>
+
+        <ImageButton
+            android:id="@+id/AlcoholLogo"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_soya"/>
+
+    </LinearLayout>
+</FrameLayout>
