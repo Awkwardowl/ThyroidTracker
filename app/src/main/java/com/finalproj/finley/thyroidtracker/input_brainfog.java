@@ -11,16 +11,16 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class sleep_input extends android.support.v4.app.Fragment {
+public class input_brainfog extends android.support.v4.app.Fragment {
 
 //    private String title;
 //    private int page;
 
-    public static sleep_input newInstance() {
-        sleep_input sleep_input = new sleep_input();
+    public static input_brainfog newInstance() {
+        input_brainfog input_brainfog = new input_brainfog();
         Bundle args = new Bundle();
 
-        return sleep_input;
+        return input_brainfog;
     }
 
     // Store instance variables based on arguments passed
@@ -35,7 +35,7 @@ public class sleep_input extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sleep_input, container, false);
+        View view = inflater.inflate(R.layout.fragment_input_brainfog, container, false);
         return view;
     }
 }

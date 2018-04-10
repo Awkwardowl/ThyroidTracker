@@ -1,4 +1,4 @@
-package com.finalproj.finley.thyroidtracker;
+package trios;
 
 
 import android.os.Bundle;
@@ -7,16 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class trio_b extends Fragment {
+import com.finalproj.finley.thyroidtracker.R;
+
+public class trio_e extends Fragment {
 
 //    private String title;
 //    private int page;
 
-    public static trio_b newInstance() {
-        trio_b trio_b = new trio_b();
+    public static trio_e newInstance() {
+        trio_e trio_e = new trio_e();
         Bundle args = new Bundle();
 
-        return trio_b;
+        return trio_e;
     }
 
     // Store instance variables based on arguments passed
@@ -31,7 +33,7 @@ public class trio_b extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trio_b, container, false);
+        View view = inflater.inflate(R.layout.fragment_trio_e, container, false);
         return view;
     }
 

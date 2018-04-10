@@ -2,21 +2,25 @@ package com.finalproj.finley.thyroidtracker;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class trio_e extends Fragment {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class input_weakness extends android.support.v4.app.Fragment {
 
 //    private String title;
 //    private int page;
 
-    public static trio_e newInstance() {
-        trio_e trio_e = new trio_e();
+    public static input_weakness newInstance() {
+        input_weakness input_weakness = new input_weakness();
         Bundle args = new Bundle();
 
-        return trio_e;
+        return input_weakness;
     }
 
     // Store instance variables based on arguments passed
@@ -31,8 +35,7 @@ public class trio_e extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trio_e, container, false);
+        View view = inflater.inflate(R.layout.fragment_input_weakness, container, false);
         return view;
     }
-
 }

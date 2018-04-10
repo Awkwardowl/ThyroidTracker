@@ -2,21 +2,25 @@ package com.finalproj.finley.thyroidtracker;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class trio_c extends Fragment {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class input_energy extends android.support.v4.app.Fragment {
 
 //    private String title;
 //    private int page;
 
-    public static trio_c newInstance() {
-        trio_c trio_c = new trio_c();
+    public static input_energy newInstance() {
+        input_energy energy_input = new input_energy();
         Bundle args = new Bundle();
 
-        return trio_c;
+        return energy_input;
     }
 
     // Store instance variables based on arguments passed
@@ -31,8 +35,7 @@ public class trio_c extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trio_c, container, false);
+        View view = inflater.inflate(R.layout.fragment_input_energy, container, false);
         return view;
     }
-
 }

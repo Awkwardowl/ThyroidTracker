@@ -11,16 +11,16 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class energy_input extends android.support.v4.app.Fragment {
+public class input_pinsandneedles extends android.support.v4.app.Fragment {
 
 //    private String title;
 //    private int page;
 
-    public static energy_input newInstance() {
-        energy_input energy_input = new energy_input();
+    public static input_pinsandneedles newInstance() {
+        input_pinsandneedles input_pinsandneedles = new input_pinsandneedles();
         Bundle args = new Bundle();
 
-        return energy_input;
+        return input_pinsandneedles;
     }
 
     // Store instance variables based on arguments passed
@@ -35,7 +35,7 @@ public class energy_input extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_energy_input, container, false);
+        View view = inflater.inflate(R.layout.fragment_input_pinsandneedles, container, false);
         return view;
     }
 }

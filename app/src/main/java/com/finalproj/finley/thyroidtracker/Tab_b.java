@@ -1,35 +1,30 @@
 package com.finalproj.finley.thyroidtracker;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import trios.trio_a;
+import trios.trio_b;
+import trios.trio_c;
+import trios.trio_d;
+import trios.trio_e;
+import trios.trio_f;
 
 /**
  * Created by Finley on 04/01/2018.
@@ -249,7 +244,7 @@ public class Tab_b extends Fragment {
 
     public static class PagerAdapterInput extends FragmentPagerAdapter {
 
-        private static int Num_Items = 2;
+        private static int Num_Items = 16;
 
         public PagerAdapterInput(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -258,10 +253,38 @@ public class Tab_b extends Fragment {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0: // Fragment # 0 - This will show FirstFragment
-                    return energy_input.newInstance();
                 case 1: // Fragment # 0 - This will show FirstFragment different title
-                    return sleep_input.newInstance();
+                    return input_activity.newInstance();
+                case 2: // Fragment # 0 - This will show FirstFragment different title
+                    return input_brainfog.newInstance();
+                case 3: // Fragment # 0 - This will show FirstFragment different title
+                    return input_brittlenails.newInstance();
+                case 4: // Fragment # 0 - This will show FirstFragment different title
+                    return input_cold.newInstance();
+                case 5: // Fragment # 0 - This will show FirstFragment different title
+                    return input_constipation.newInstance();
+                case 6: // Fragment # 0 - This will show FirstFragment different title
+                    return input_cramps.newInstance();
+                case 7: // Fragment # 0 - This will show FirstFragment different title
+                    return input_cruciferous.newInstance();
+                case 8: // Fragment # 0 - This will show FirstFragment different title
+                    return input_depression.newInstance();
+                case 9: // Fragment # 0 - This will show FirstFragment
+                    return input_energy.newInstance();
+                case 10: // Fragment # 0 - This will show FirstFragment different title
+                    return input_iodine.newInstance();
+                case 11: // Fragment # 0 - This will show FirstFragment different title
+                    return input_lossoflibido.newInstance();
+                case 12: // Fragment # 0 - This will show FirstFragment different title
+                    return input_pinsandneedles.newInstance();
+                case 13: // Fragment # 0 - This will show FirstFragment different title
+                    return input_sleep.newInstance();
+                case 14: // Fragment # 0 - This will show FirstFragment different title
+                    return input_soya.newInstance();
+                case 15: // Fragment # 0 - This will show FirstFragment different title
+                    return input_tiredness.newInstance();
+                case 16: // Fragment # 0 - This will show FirstFragment different title
+                    return input_weakness.newInstance();
                 default:
                     return null;
             }
