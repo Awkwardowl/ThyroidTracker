@@ -253,37 +253,37 @@ public class Tab_b extends Fragment {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 1: // Fragment # 0 - This will show FirstFragment different title
+                case 0: // Fragment # 0 - This will show FirstFragment different title
                     return input_activity.newInstance();
-                case 2: // Fragment # 0 - This will show FirstFragment different title
+                case 1: // Fragment # 0 - This will show FirstFragment different title
                     return input_brainfog.newInstance();
-                case 3: // Fragment # 0 - This will show FirstFragment different title
+                case 2: // Fragment # 0 - This will show FirstFragment different title
                     return input_brittlenails.newInstance();
-                case 4: // Fragment # 0 - This will show FirstFragment different title
+                case 3: // Fragment # 0 - This will show FirstFragment different title
                     return input_cold.newInstance();
-                case 5: // Fragment # 0 - This will show FirstFragment different title
+                case 4: // Fragment # 0 - This will show FirstFragment different title
                     return input_constipation.newInstance();
-                case 6: // Fragment # 0 - This will show FirstFragment different title
+                case 5: // Fragment # 0 - This will show FirstFragment different title
                     return input_cramps.newInstance();
-                case 7: // Fragment # 0 - This will show FirstFragment different title
+                case 6: // Fragment # 0 - This will show FirstFragment different title
                     return input_cruciferous.newInstance();
-                case 8: // Fragment # 0 - This will show FirstFragment different title
+                case 7: // Fragment # 0 - This will show FirstFragment different title
                     return input_depression.newInstance();
-                case 9: // Fragment # 0 - This will show FirstFragment
+                case 8: // Fragment # 0 - This will show FirstFragment
                     return input_energy.newInstance();
-                case 10: // Fragment # 0 - This will show FirstFragment different title
+                case 9: // Fragment # 0 - This will show FirstFragment different title
                     return input_iodine.newInstance();
-                case 11: // Fragment # 0 - This will show FirstFragment different title
+                case 10: // Fragment # 0 - This will show FirstFragment different title
                     return input_lossoflibido.newInstance();
-                case 12: // Fragment # 0 - This will show FirstFragment different title
+                case 11: // Fragment # 0 - This will show FirstFragment different title
                     return input_pinsandneedles.newInstance();
-                case 13: // Fragment # 0 - This will show FirstFragment different title
+                case 12: // Fragment # 0 - This will show FirstFragment different title
                     return input_sleep.newInstance();
-                case 14: // Fragment # 0 - This will show FirstFragment different title
+                case 13: // Fragment # 0 - This will show FirstFragment different title
                     return input_soya.newInstance();
-                case 15: // Fragment # 0 - This will show FirstFragment different title
+                case 14: // Fragment # 0 - This will show FirstFragment different title
                     return input_tiredness.newInstance();
-                case 16: // Fragment # 0 - This will show FirstFragment different title
+                case 15: // Fragment # 0 - This will show FirstFragment different title
                     return input_weakness.newInstance();
                 default:
                     return null;
