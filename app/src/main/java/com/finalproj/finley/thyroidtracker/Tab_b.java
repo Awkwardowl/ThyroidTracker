@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import trios.trio_f;
 
 public class Tab_b extends Fragment {
 
+    int previouspage;
     ViewPager mPager;
     ViewPager inputPager;
     FragmentPagerAdapter adapterViewPager;
@@ -48,7 +50,7 @@ public class Tab_b extends Fragment {
         adapterViewPager = new PageAdapterSelector(getChildFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 
-        ViewPager viewPager2 = (ViewPager) Fragment.findViewById(R.id.InputSelector);
+        final ViewPager viewPager2 = (ViewPager) Fragment.findViewById(R.id.InputSelector);
         adapterViewPager2 = new PagerAdapterInput(getChildFragmentManager());
         viewPager2.setAdapter(adapterViewPager2);
 
@@ -61,12 +63,37 @@ public class Tab_b extends Fragment {
         viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                viewPager.setCurrentItem(1);
+//                if (viewPager2.getCurrentItem()%3==0)
+//                {
+//                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
+//                }
+//                Context context = getContext();
+//                Toast toast = Toast.makeText(context, String.valueOf(viewPager.getCurrentItem() +", " +viewPager2.getCurrentItem()+", " +currentpage), Toast.LENGTH_SHORT);
+//                toast.show();
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                toast.cancel();
             }
 
             @Override
             public void onPageSelected(int position) {
+                Log.d("debug",position +","+previouspage);
 
+                if ((position)%3==0&&previouspage<position)
+                {
+
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
+                }
+                else if((position+1)%3==0&&previouspage>position)
+                {
+
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()-1,true);
+                }
+                previouspage = viewPager2.getCurrentItem();
+                //                if (position%3==0&&currentpage>position)
             }
 
             @Override
@@ -80,9 +107,9 @@ public class Tab_b extends Fragment {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        Context context = getContext();
-        Toast toast = Toast.makeText(context, date + "," + dayOfWeek, Toast.LENGTH_LONG);
-        toast.show();
+//        Context context = getContext();
+//        Toast toast = Toast.makeText(context, date + "," + dayOfWeek, Toast.LENGTH_LONG);
+//        toast.show();
 
         Calendar now = Calendar.getInstance();
 
