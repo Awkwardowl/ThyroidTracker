@@ -62,44 +62,16 @@ public class Tab_b extends Fragment {
 
         viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                if (viewPager2.getCurrentItem()%3==0)
-//                {
-//                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
-//                }
-//                Context context = getContext();
-//                Toast toast = Toast.makeText(context, String.valueOf(viewPager.getCurrentItem() +", " +viewPager2.getCurrentItem()+", " +currentpage), Toast.LENGTH_SHORT);
-//                toast.show();
-//                try {
-//                    Thread.sleep(100);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                toast.cancel();
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                viewPager.setCurrentItem((int) Math.floor(position/3));
             }
 
             @Override
-            public void onPageSelected(int position) {
-                Log.d("debug",position +","+previouspage);
-
-                if ((position)%3==0&&previouspage<position)
-                {
-
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
-                }
-                else if((position+1)%3==0&&previouspage>position)
-                {
-
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()-1,true);
-                }
-                previouspage = viewPager2.getCurrentItem();
-                //                if (position%3==0&&currentpage>position)
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) { }
         });
 
 

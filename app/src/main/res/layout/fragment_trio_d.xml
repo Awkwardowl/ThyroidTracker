@@ -18,7 +18,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_cruciferous"/>
+            android:src="@drawable/logo_iodine"/>
 
         <ImageButton
             android:id="@+id/EmoteinalLogo"
@@ -28,7 +28,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_depression"/>
+            android:src="@drawable/logo_lossoflibido"/>
 
         <ImageButton
             android:id="@+id/AlcoholLogo"
@@ -38,7 +38,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_iodine"/>
+            android:src="@drawable/logo_pinsandneedles"/>
 
     </LinearLayout>
 </FrameLayout>

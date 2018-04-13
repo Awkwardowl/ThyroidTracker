@@ -18,7 +18,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/energylogo"/>
+            android:src="@drawable/logo_activity"/>
 
         <ImageButton
             android:id="@+id/SleepLogo"
@@ -28,7 +28,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/sleeplogo"/>
+            android:src="@drawable/logo_brainfog"/>
 
         <ImageButton
             android:id="@+id/EmoteinalLogo"
@@ -38,7 +38,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/emotionlogo"/>
+            android:src="@drawable/logo_brittlenails"/>
 
     </LinearLayout>
 

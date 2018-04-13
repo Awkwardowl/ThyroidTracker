@@ -21,7 +21,7 @@
             android:src="@drawable/logo_weakness"/>
 
         <ImageButton
-            android:id="@+id/EmoteinalLogo"
+            android:id="@+id/EmotionalLogo"
             android:layout_width="120dip"
             android:layout_height="120dip"
             android:layout_weight="1"
