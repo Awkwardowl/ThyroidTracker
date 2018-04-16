@@ -74,7 +74,7 @@
                     android:layout_marginBottom="33.0dip"
                     android:layout_marginLeft="5dip"
                     android:layout_marginRight="5.0dip"
-                    android:layout_marginTop="10.0dip"
+                    android:layout_marginTop="7.0dip"
                     android:background="@drawable/bad_brainfog"
                     android:padding="5.0dip"
                     android:textAlignment="gravity"

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="How weak you feel?"
+            android:text="How weak do you feel?"
             android:textAlignment="center"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -56,6 +56,15 @@
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="No unexpected \n weakness"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <Button
                     android:id="@+id/buttonC"
@@ -64,13 +73,22 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="33.0dip"
                     android:layout_marginLeft="5dip"
-                    android:layout_marginRight="5.0dip"
+                    android:layout_marginRight="0dip"
                     android:layout_marginTop="7.0dip"
                     android:background="@drawable/bad_weakness"
                     android:padding="5.0dip"
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="Extreme unexpected \n weakness"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,6 +110,15 @@
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="Some unexpected \n weakness"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <Button
                     android:id="@+id/buttonD"

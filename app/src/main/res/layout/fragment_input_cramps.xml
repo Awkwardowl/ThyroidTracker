@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Muscle Cramps or Pain"
+            android:text="Any muscle cramps or pain?"
             android:textAlignment="center"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"

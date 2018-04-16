@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="How tired you feel?"
+            android:text="How tired do you feel?"
             android:textAlignment="center"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -61,7 +61,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="top"
                     android:layout_marginTop="-35dp"
-                    android:text="No tiredness"
+                    android:text="No unexpected \n tiredness"
                     android:textAlignment="center"
                     android:textSize="15dp" />
 
@@ -72,13 +72,22 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="33.0dip"
                     android:layout_marginLeft="5dip"
-                    android:layout_marginRight="5.0dip"
+                    android:layout_marginRight="0dip"
                     android:layout_marginTop="7.0dip"
                     android:background="@drawable/bad_tiredness"
                     android:padding="5.0dip"
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="Extreme unexpected \n tiredness"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +115,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="top"
                     android:layout_marginTop="-35dp"
-                    android:text="More than 150 μg"
+                    android:text="Mild unexpected \n tiredness"
                     android:textAlignment="center"
                     android:textSize="15dp" />
 
