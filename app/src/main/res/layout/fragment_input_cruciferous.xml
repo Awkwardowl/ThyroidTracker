@@ -30,6 +30,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginLeft="15dip"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,29 +47,48 @@
                     android:layout_width="165.0dip"
                     android:layout_height="140.0dip"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="35.0dip"
-                    android:layout_marginLeft="17dip"
+                    android:layout_marginBottom="33.0dip"
+                    android:layout_marginLeft="5dip"
                     android:layout_marginRight="5.0dip"
-                    android:layout_marginTop="10.0dip"
+                    android:layout_marginTop="7.0dip"
                     android:background="@drawable/good_cruciferous"
                     android:padding="5.0dip"
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="No cruciferous \n vegetable consumption"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <Button
                     android:id="@+id/buttonC"
                     android:layout_width="165.0dip"
                     android:layout_height="140.0dip"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="35.0dip"
-                    android:layout_marginLeft="17dip"
+                    android:layout_marginBottom="33.0dip"
+                    android:layout_marginLeft="5dip"
                     android:layout_marginRight="5.0dip"
+                    android:layout_marginTop="7.0dip"
                     android:background="@drawable/bad_cruciferous"
                     android:padding="5.0dip"
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="Large amount of cruciferous \n vegetable consumed"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -81,15 +101,24 @@
                     android:layout_width="165.0dip"
                     android:layout_height="140.0dip"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="15.0dip"
-                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginBottom="33.0dip"
+                    android:layout_marginLeft="5dip"
                     android:layout_marginRight="5.0dip"
-                    android:layout_marginTop="10.0dip"
+                    android:layout_marginTop="7.0dip"
                     android:background="@drawable/okay_cruciferous"
                     android:padding="0.0dip"
                     android:textAlignment="gravity"
                     android:textColor="#ffffffff"
                     android:textSize="20.0sp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="-35dp"
+                    android:text="Some cruciferous vegetable consumption"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <Button
                     android:id="@+id/buttonD"
