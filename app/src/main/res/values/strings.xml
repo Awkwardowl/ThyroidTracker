@@ -10,4 +10,22 @@
     <item>TSH</item>
     <item>T4</item>
 </string-array>
+    <string-array name="Resulttypes">
+        <item>Activity</item>
+        <item>Brainfog</item>
+        <item>Brittlenails</item>
+        <item>Cold</item>
+        <item>Constipation</item>
+        <item>Cramps</item>
+        <item>Crucierous</item>
+        <item>Depression</item>
+        <item>Energy</item>
+        <item>Iodine</item>
+        <item>Loss of libido</item>
+        <item>Pins and Needles</item>
+        <item>Sleep</item>
+        <item>Soya</item>
+        <item>Tiredness</item>
+        <item>Weakness</item>
+    </string-array>
 </resources>
