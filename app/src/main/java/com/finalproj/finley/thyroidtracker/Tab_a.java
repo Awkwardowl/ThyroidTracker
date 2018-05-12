@@ -50,6 +50,7 @@ public class Tab_a extends Fragment {
     Date d2;
 
     SimpleDateFormat sdf= new SimpleDateFormat("dd:MM");
+    SimpleDateFormat sdfo= new SimpleDateFormat("dd/MM");
 
     @Nullable
     @Override
@@ -179,7 +180,7 @@ public class Tab_a extends Fragment {
             public String formatLabel(double value, boolean isValueX) {
                 if(isValueX)
                 {
-                    return sdf.format(new Date((long) value));
+                    return sdfo.format(new Date((long) value));
                 } else
                 return super.formatLabel(value, isValueX);
             }
@@ -235,7 +236,7 @@ public class Tab_a extends Fragment {
 //        graphView.getViewport().setScalable(true);
         graphView.getViewport().setScrollable(true);
         graphView.getViewport().setScalable(true);
-        
+
 //        graphView.getViewport().setScalableY(true);
 //        graphView.getViewport().setScrollableY(true);
 

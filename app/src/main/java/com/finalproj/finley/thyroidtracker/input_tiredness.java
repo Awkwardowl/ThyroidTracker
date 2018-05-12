@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.opencsv.CSVWriter;
@@ -16,6 +17,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import ru.bullyboo.view.CircleSeekBar;
 
 
 /**
@@ -49,69 +52,54 @@ public class input_tiredness extends android.support.v4.app.Fragment {
 
         final String FileName = "/Tiredness.csv";
         Date date = new Date();
-        SimpleDateFormat sdf= new SimpleDateFormat("dd:MM");
+
+        SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
         final String StringDate = sdf.format(new Date());
 
-        Button A = (Button) view.findViewById(R.id.buttonA);
-        A.setOnClickListener(new View.OnClickListener()  {
+        final CircleSeekBar Input = (CircleSeekBar) view.findViewById(R.id.circleSeekBar);
+        final TextView output = (TextView) view.findViewById(R.id.Readout);
+        Input.setValue(0);
+        Input.setOnValueChangedListener(new CircleSeekBar.OnValueChangedListener() {
             @Override
-            public void onClick(View v) {
-                Context context = getContext();
-                Toast.makeText(context, "testA", Toast.LENGTH_SHORT).show();
-                try {
-                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                    String Enter = "100#" + StringDate;
-                    String[] entries = Enter.split("#");
-                    writer.writeNext(entries);
-                    writer.close();
-                } catch(IOException ie) {
-                    ie.printStackTrace();
+            public void onValueChanged(int i) {
+                int v = Input.getValue();
+                if (v <= 25) {
+                    output.setText("Sedentary");
                 }
-            }
-        });
-        Button B = (Button) view.findViewById(R.id.buttonB);
-        B.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = getContext();
-                Toast.makeText(context, "testB", Toast.LENGTH_SHORT).show();
-                try {
-                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                    String Enter = "50#" + StringDate;
-                    String[] entries = Enter.split("#");
-                    writer.writeNext(entries);
-                    writer.close();
-                } catch(IOException ie) {
-                    ie.printStackTrace();
+                else if ( v > 25 && v <=50)
+                {
+                    output.setText("Light");
                 }
-            }
-        });
-        Button C = (Button) view.findViewById(R.id.buttonC);
-        C.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = getContext();
-                Toast.makeText(context, "testC", Toast.LENGTH_SHORT).show();
-                try {
-                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                    String Enter = "10#" + StringDate;
-                    String[] entries = Enter.split("#");
-                    writer.writeNext(entries);
-                    writer.close();
-                } catch(IOException ie) {
-                    ie.printStackTrace();
+                else if ( v > 50 && v <= 75)
+                {
+                    output.setText("Moderate");
                 }
-            }
-        });
-        Button D = (Button) view.findViewById(R.id.buttonD);
-        D.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = getContext();
-                Toast.makeText(context, "Help Text", Toast.LENGTH_SHORT).show();
+                else if ( v > 75 )
+                {
+                    output.setText("Intense");
+                }
+
+
             }
         });
 
+        Button Submit = (Button) view.findViewById(R.id.button4);
+        Submit.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                Toast.makeText(context, "Data Submitted for "+StringDate, Toast.LENGTH_SHORT).show();
+                try {
+                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                    String Enter = Input.getValue() +"#" + StringDate;
+                    String[] entries = Enter.split("#");
+                    writer.writeNext(entries);
+                    writer.close();
+                } catch(IOException ie) {
+                    ie.printStackTrace();
+                }
+            }
+        });
         return view;
     }
 }
