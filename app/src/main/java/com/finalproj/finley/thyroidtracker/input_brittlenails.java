@@ -63,7 +63,7 @@ public class input_brittlenails extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Sedentary");
+                    output.setText("Normal");
                 }
                 else if ( v > 25 && v <=50)
                 {
@@ -75,7 +75,7 @@ public class input_brittlenails extends android.support.v4.app.Fragment {
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Intense");
+                    output.setText("Extreme");
                 }
 
 

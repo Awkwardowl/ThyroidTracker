@@ -63,19 +63,19 @@ public class input_cruciferous extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Sedentary");
+                    output.setText("None");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Light");
+                    output.setText("Some");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Moderate");
+                    output.setText("Nearly Daily Allowance");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Intense");
+                    output.setText("Over Daily Allowance");
                 }
 
 

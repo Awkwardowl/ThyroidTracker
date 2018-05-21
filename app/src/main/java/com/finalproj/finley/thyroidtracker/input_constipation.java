@@ -63,11 +63,11 @@ public class input_constipation extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Sedentary");
+                    output.setText("Normal");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Light");
+                    output.setText("Slight");
                 }
                 else if ( v > 50 && v <= 75)
                 {
@@ -75,7 +75,7 @@ public class input_constipation extends android.support.v4.app.Fragment {
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Intense");
+                    output.setText("Extreme");
                 }
 
 

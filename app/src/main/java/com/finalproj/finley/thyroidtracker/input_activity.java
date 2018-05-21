@@ -106,67 +106,6 @@ public class input_activity extends android.support.v4.app.Fragment {
             }
         });
 
-
-//        Button A = (Button) view.findViewById(R.id.buttonA);
-//        A.setOnClickListener(new View.OnClickListener()  {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = getContext();
-//                Toast.makeText(context, "testA", Toast.LENGTH_SHORT).show();
-//                try {
-//                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-//                    String Enter = "100#" + StringDate;
-//                    String[] entries = Enter.split("#");
-//                    writer.writeNext(entries);
-//                    writer.close();
-//                } catch(IOException ie) {
-//                    ie.printStackTrace();
-//                }
-//            }
-//        });
-//        Button B = (Button) view.findViewById(R.id.buttonB);
-//        B.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = getContext();
-//                Toast.makeText(context, "testB", Toast.LENGTH_SHORT).show();
-//                try {
-//                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-//                    String Enter = "50#" + StringDate;
-//                    String[] entries = Enter.split("#");
-//                    writer.writeNext(entries);
-//                    writer.close();
-//                } catch(IOException ie) {
-//                    ie.printStackTrace();
-//                }
-//            }
-//        });
-//        Button C = (Button) view.findViewById(R.id.buttonC);
-//        C.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = getContext();
-//                Toast.makeText(context, "testC", Toast.LENGTH_SHORT).show();
-//                try {
-//                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-//                    String Enter = "10#" + StringDate;
-//                    String[] entries = Enter.split("#");
-//                    writer.writeNext(entries);
-//                    writer.close();
-//                } catch(IOException ie) {
-//                    ie.printStackTrace();
-//                }
-//            }
-//        });
-//        Button D = (Button) view.findViewById(R.id.buttonD);
-//        D.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = getContext();
-//                Toast.makeText(context, "Help Text", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         return view;
     }
 }
