@@ -63,19 +63,19 @@ public class input_cramps extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("No cramps");
+                    output.setText("No Cramps or Pain");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Few");
+                    output.setText("Few Cramps or Pain");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Moderate");
+                    output.setText("Moderate Cramps or Pain");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Extreme");
+                    output.setText("Extreme Cramps or Pain");
                 }
 
 

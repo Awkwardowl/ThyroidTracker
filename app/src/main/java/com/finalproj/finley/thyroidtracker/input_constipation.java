@@ -63,19 +63,19 @@ public class input_constipation extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Normal");
+                    output.setText("Normal Bowel Function");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Slight");
+                    output.setText("Slight Change in Bowel Function");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Moderate");
+                    output.setText("Moderate change in Bowel Function");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Extreme");
+                    output.setText("Extreme change in Bowel Function");
                 }
 
 

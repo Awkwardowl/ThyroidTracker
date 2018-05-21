@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Minimal cold senstivity"
+            android:text="No cold senstivity"
             android:textAlignment="center"
             android:textSize="16dp"
 

@@ -64,19 +64,19 @@ public class input_lossoflibido extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Normal");
+                    output.setText("No Loss of Libido");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Slight Reduction");
+                    output.setText("Slight Reduction of Libido");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Noticeably Lower");
+                    output.setText("Noticeably Lower Libido");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Extremely Low");
+                    output.setText("Extremely Low Libido");
                 }
 
 

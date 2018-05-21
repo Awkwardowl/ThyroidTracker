@@ -44,7 +44,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Low Energy Levels"
+            android:text="High energy levels"
             android:textAlignment="center"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"

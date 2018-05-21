@@ -64,7 +64,7 @@ public class input_pinsandneedles extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("None");
+                    output.setText("No Pins and Needles");
                 }
                 else if ( v > 25 && v <=50)
                 {
@@ -72,11 +72,11 @@ public class input_pinsandneedles extends android.support.v4.app.Fragment {
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Noticeably");
+                    output.setText("Noticeably increased pins and needles");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Unbearable");
+                    output.setText("Unbearable pins and needles");
                 }
 
 

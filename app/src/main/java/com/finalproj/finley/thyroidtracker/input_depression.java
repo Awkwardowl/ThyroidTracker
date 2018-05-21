@@ -63,19 +63,19 @@ public class input_depression extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Normal State of Mind");
+                    output.setText("No feeling of depression");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Slightly Down");
+                    output.setText("Slightly down");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Moderate Depression");
+                    output.setText("Moderate depression");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Severely Depressed");
+                    output.setText("Severely depressed");
                 }
 
 

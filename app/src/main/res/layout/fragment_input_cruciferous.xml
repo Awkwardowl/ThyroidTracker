@@ -44,7 +44,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Little Cruciferous consumed"
+            android:text="No Cruciferous consumed"
             android:textAlignment="center"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
