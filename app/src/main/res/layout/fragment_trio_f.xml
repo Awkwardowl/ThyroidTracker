@@ -18,7 +18,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_weakness"/>
+            android:src="@drawable/logo_tiredness"/>
 
         <ImageButton
             android:id="@+id/EmotionalLogo"
@@ -28,7 +28,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_weight"/>
+            android:src="@drawable/logo_weakness"/>
 
         <ImageButton
             android:id="@+id/AlcoholLogo"
@@ -38,7 +38,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_tiredness"/>
+            android:src="@drawable/logo_weight"/>
 
     </LinearLayout>
 </FrameLayout>

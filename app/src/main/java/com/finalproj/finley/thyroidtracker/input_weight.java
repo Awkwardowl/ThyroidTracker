@@ -24,16 +24,16 @@ import ru.bullyboo.view.CircleSeekBar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class input_sleep extends android.support.v4.app.Fragment {
+public class input_weight extends android.support.v4.app.Fragment {
 
 //    private String title;
 //    private int page;
 
-    public static input_sleep newInstance() {
-        input_sleep input_sleep = new input_sleep();
+    public static input_soya newInstance() {
+        input_soya input_soya = new input_soya();
         Bundle args = new Bundle();
 
-        return input_sleep;
+        return input_soya;
     }
 
     // Store instance variables based on arguments passed
@@ -48,9 +48,9 @@ public class input_sleep extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_input_sleep, container, false);
+        View view = inflater.inflate(R.layout.fragment_input_weight, container, false);
 
-        final String FileName = "/Sleep.csv";
+        final String FileName = "/Weight.csv";
         Date date = new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
         final String StringDate = sdf.format(new Date());
@@ -63,19 +63,19 @@ public class input_sleep extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Nine or more hours");
+                    output.setText("No Soya Consumed");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Seven or more hours");
+                    output.setText("Several hours after medication");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("More than three");
+                    output.setText("Within two hours of medication");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Less than three");
+                    output.setText("Within half hour of medication");
                 }
 
 

@@ -5,11 +5,10 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-
-<string-array name="MedicationTypes">
-    <item>TSH</item>
-    <item>T4</item>
-</string-array>
+    <string-array name="MedicationTypes">
+        <item>TSH</item>
+        <item>T4</item>
+    </string-array>
     <string-array name="Resulttypes">
         <item>Activity</item>
         <item>Brainfog</item>
@@ -25,7 +24,9 @@
         <item>Pins and Needles</item>
         <item>Sleep</item>
         <item>Soya</item>
+        <item>Thirst</item>
         <item>Tiredness</item>
         <item>Weakness</item>
+        <item>Weight</item>
     </string-array>
 </resources>

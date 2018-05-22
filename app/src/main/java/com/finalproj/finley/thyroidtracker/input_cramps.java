@@ -90,8 +90,8 @@ public class input_cramps extends android.support.v4.app.Fragment {
                 Toast.makeText(context, "Data Submitted for "+StringDate, Toast.LENGTH_SHORT).show();
                 try {
                     CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                    String Enter = Input.getValue() +"#" + StringDate;
-                    String[] entries = Enter.split("#");
+                    String Enter = Input.getValue() +"," + StringDate;
+                    String[] entries = Enter.split(",");
                     writer.writeNext(entries);
                     writer.close();
                 } catch(IOException ie) {

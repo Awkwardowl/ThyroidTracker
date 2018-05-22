@@ -149,44 +149,6 @@ public class Tab_b extends Fragment {
                 break;
         }
 
-//        final Button ButtonA = (Button) Fragment.findViewById(R.id.buttonA);
-//        final Button ButtonB = (Button) Fragment.findViewById(R.id.buttonB);
-//        final Button ButtonC = (Button) Fragment.findViewById(R.id.buttonC);
-//        final Button ButtonD = (Button) Fragment.findViewById(R.id.buttonD);
-//
-//
-//        ImageButton EnergyLogo = (ImageButton) Fragment.findViewById(R.id.EnergyLogo);
-//        final TextView textView = (TextView) Fragment.findViewById(R.id.Title);
-//        EnergyLogo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                textView.setText("Energy Levels");
-//                ButtonA.setText("High Energy");
-//                ButtonA.setBackgroundResource(R.drawable.goodenergy);
-//                ButtonB.setText("Medium Energy");
-//                ButtonB.setBackgroundResource(R.drawable.okayenergy);
-//                ButtonC.setText("Low Energy");
-//                ButtonC.setBackgroundResource(R.drawable.badenergy);
-//                ButtonD.setText("No Energy");
-//            }
-//        });
-//
-//        ImageButton SleepLogo = (ImageButton) Fragment.findViewById(R.id.SleepLogo);
-//        SleepLogo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                textView.setText("Sleep Quality");
-//                ButtonA.setText("Slept Well");
-//                ButtonA.setBackgroundResource(R.drawable.goodsleep);
-//                ButtonB.setText("Slept Okay");
-//                ButtonB.setBackgroundResource(R.drawable.okaysleep);
-//                ButtonC.setText("Slept Poorly");
-//                ButtonC.setBackgroundResource(R.drawable.badsleep);
-//                ButtonD.setText("Slept extremely poorly.");
-//            }
-//        });
-
-
         return Fragment;
     }
 
@@ -243,7 +205,7 @@ public class Tab_b extends Fragment {
 
     public static class PagerAdapterInput extends FragmentPagerAdapter {
 
-        private static int Num_Items = 16;
+        private static int Num_Items = 18;
 
         public PagerAdapterInput(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -281,9 +243,13 @@ public class Tab_b extends Fragment {
                 case 13: // Fragment # 0 - This will show FirstFragment different title
                     return input_soya.newInstance();
                 case 14: // Fragment # 0 - This will show FirstFragment different title
-                    return input_tiredness.newInstance();
+                    return input_thirst.newInstance();
                 case 15: // Fragment # 0 - This will show FirstFragment different title
+                    return input_tiredness.newInstance();
+                case 16: // Fragment # 0 - This will show FirstFragment different title
                     return input_weakness.newInstance();
+                case 17: // Fragment # 0 - This will show FirstFragment different title
+                    return input_weight.newInstance();
                 default:
                     return null;
             }

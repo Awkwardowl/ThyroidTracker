@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         int fragmentId = getIntent().getIntExtra("Fragment_ID",0);
         mViewPager.setCurrentItem(fragmentId);
 
-
     }
 
 
