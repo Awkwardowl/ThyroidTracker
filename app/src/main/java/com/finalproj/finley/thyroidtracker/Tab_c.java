@@ -2,11 +2,8 @@ package com.finalproj.finley.thyroidtracker;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.app.TimePickerDialog;
@@ -26,11 +26,18 @@ import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.PointsGraphSeries;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -46,9 +53,9 @@ public class Tab_c extends Fragment {
     TimePickerDialog timePickerDialog;
     GraphView graphView;
     LineGraphSeries<DataPoint> series;
-    SimpleDateFormat sdf= new SimpleDateFormat("dd:MM");
-    LineGraphSeries<DataPoint> TSH ;
-    LineGraphSeries<DataPoint> T4 ;
+    LineGraphSeries<DataPoint> series2;
+    LineGraphSeries<DataPoint> series3;
+    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
 
     @Nullable
     @Override
@@ -57,7 +64,34 @@ public class Tab_c extends Fragment {
         final Context context;
         context = getContext();
 
+        String[] ResourceNames = getResources().getStringArray(R.array.LabsResultsTypes);
+        for (String s: ResourceNames)
+        {
+            try
+            {
+                String FileName="/"+s+".csv";
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date());
+                cal.add(Calendar.DATE, -91);
+                Date TempDate;
+                String DateString;
 
+                CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
+                for (int i=1; i<=3; i++)
+                {
+                    cal.add(Calendar.DATE, 30);
+                    TempDate = cal.getTime();
+                    DateString = sdf.format(TempDate);
+                    String Enter = "";
+                    Enter = Math.ceil(20+Math.random()*50)+","+ DateString;
+                    String[] entries = Enter.split(",");
+                    writer.writeNext(entries);
+                }
+                writer.close();
+            } catch(IOException ie) {
+                ie.printStackTrace();
+            }
+        }
 
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         final Intent intent = new Intent(context, Alarm_Receiver.class);
@@ -93,6 +127,8 @@ public class Tab_c extends Fragment {
 
                         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,alarmIntent);
 
+                        Context context = getContext();
+                        Toast.makeText(context, "Alarm set for: " + date + ":" + date2, Toast.LENGTH_SHORT).show();
 
 //                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000 * 60 * 20, alarmIntent);
 //                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
@@ -122,7 +158,7 @@ public class Tab_c extends Fragment {
         });
 
         final Spinner spinner = (Spinner) Fragment.findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.MedicationTypes, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.LabsResultsTypes, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -143,39 +179,152 @@ public class Tab_c extends Fragment {
             }
         });
 
-        series=new LineGraphSeries<>(getDataPoint());
+        series=new LineGraphSeries<>(getDataPoint("T4"));
+        series2=new LineGraphSeries<>(getDataPoint("TSH"));
+        series3=new LineGraphSeries<>(getDataPoint("T3"));
         graphView.addSeries(series);
-
+        graphView.addSeries(series2);
+        graphView.addSeries(series3);
 
         final EditText editText = (EditText) Fragment.findViewById(R.id.editText);
         final Button button3 = (Button) Fragment.findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener(){
             public void onClick(final View v) {
+
+                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
+                final String StringDate = sdf.format(new Date());
+
                 String Type = String.valueOf(spinner.getSelectedItem());
                 Double data = Double.valueOf(editText.getText().toString());
+
                 Log.d("D",Type);
-                if (Type.equals("T4"))
-                {
 
+                Context context = getContext();
+                String[] LastDateLine;
+                String LastDate=null;
+                List<String[]> File = null;
+                final String FileName = "/" + Type + ".csv";
+                    try
+                    {
+                        CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t', '"', 0);
+                        File = reader.readAll();
+                        LastDateLine =File.get(File.size()-1);
+                        LastDate = LastDateLine[1];
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
+
+
+
+                    if (!(LastDate.equals(StringDate)))
+                    {
+                        try {
+                            CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                            String Enter = editText.getText() + "," + StringDate;
+                            String[] entries = Enter.split(",");
+                            writer.writeNext(entries);
+                            Toast.makeText(context, Type+" data Submitted for " + StringDate, Toast.LENGTH_SHORT).show();
+                            writer.close();
+                        } catch (IOException ie) {
+                            ie.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        try{
+                            CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
+                            File.remove(File.size()-1);
+                            writer.writeAll(File);
+                            writer.close();
+                            CSVWriter writer2 = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                            String Enter = editText.getText() + "," + StringDate;
+                            String[] entries = Enter.split(",");
+                            writer2.writeNext(entries);
+                            writer2.close();
+                            Toast.makeText(context, Type+" data Resubmitted for " + StringDate, Toast.LENGTH_SHORT).show();
+                        } catch (IOException ie) {
+                            ie.printStackTrace();
+                        }
+                    }
+
+                graphView.removeAllSeries();
+
+                series=new LineGraphSeries<>(getDataPoint("T4"));
+                series.setColor(getResources().getColor(android.R.color.holo_blue_dark));
+                graphView.addSeries(series);
+
+                series2=new LineGraphSeries<>(getDataPoint("TSH"));
+                series2.setColor(getResources().getColor(android.R.color.holo_green_dark));
+                graphView.addSeries(series2);
+
+                series3=new LineGraphSeries<>(getDataPoint("T3"));
+                series3.setColor(getResources().getColor(android.R.color.holo_red_dark));
+                graphView.addSeries(series3);
+
+            }
+        });
+
+        final TextView textView10 = (TextView)  Fragment.findViewById(R.id.textView10);
+        final TextView textView2 = (TextView)  Fragment.findViewById(R.id.textView2);
+        final EditText editText3 = (EditText) Fragment.findViewById(R.id.editText3);
+        final EditText editText2 = (EditText) Fragment.findViewById(R.id.editText2);
+        textView10.setEnabled(false);
+        editText3.setEnabled(false);
+
+
+        final Switch toggle = (Switch) Fragment.findViewById(R.id.switch1);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (toggle.isChecked())
+                {
+                    textView10.setEnabled(true);
+                    editText3.setEnabled(true);
                 }
-                else if (Type.equals("TSH"))
+                else
                 {
-
+                    textView10.setEnabled(false);
+                    editText3.setEnabled(false);
                 }
             }
         });
 
 
+
         return Fragment;
     }
 
-    private DataPoint[] getDataPoint() {
-        DataPoint[] dp=new DataPoint[]{
-                new DataPoint(new Date().getTime(), 1.3),
-                new DataPoint(new Date().getTime()+1, 3.4),
-                new DataPoint(new Date().getTime()+2, 2.7)
+    private DataPoint[] getDataPoint(String Type) {
+        Context context = getContext();
+        String FileName="/" + Type+".csv";
+        ArrayList<String[]> List = new ArrayList<>();
 
-        };
+        try {
+
+            CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t' ,'"',0);
+            String[] nextline;
+
+            while ((nextline = reader.readNext()) != null) {
+                if (nextline != null) {
+                    Log.d(TAG, Arrays.toString(nextline)+"xxxxxxxx\n");
+                    List.add(nextline);
+                }
+
+            }
+        }catch(IOException ie) {
+            ie.printStackTrace();
+        }
+        DataPoint[] dp = new DataPoint[List.size()];
+
+
+        for(int i = 0; i<List.size();i++)
+            try {
+                String[] Temp = List.get(i);
+                Date date = sdf.parse(Temp[1]);
+                DataPoint D = new DataPoint(date.getTime(),Double.parseDouble(Temp[0]));
+                dp[i] = D;
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
         return dp;
     }
 }

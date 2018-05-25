@@ -74,10 +74,10 @@ public class AlarmPlayer extends Service{
             Log.d(TAG, String.valueOf(day));
             if (day%2==0)
             {
-                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText("125mcg Levothyroxine").setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.mipmap.ic_launcher).build();
+                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText("125mcg Levothyroxine").setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
                 notificationManager.notify(0, AlarmPopup);
             } else {
-                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText("100mcg Levothyroxine").setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.mipmap.ic_launcher).build();
+                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText("100mcg Levothyroxine").setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
                 notificationManager.notify(0, AlarmPopup);
             }
 

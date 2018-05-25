@@ -11,12 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import ru.bullyboo.view.CircleSeekBar;
 
@@ -64,19 +67,19 @@ public class input_lossoflibido extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("No Loss of Libido");
+                    output.setText("No loss of libido");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Slight Reduction of Libido");
+                    output.setText("Slight reduction of libido");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Noticeably Lower Libido");
+                    output.setText("Noticeably lower libido");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Extremely Low Libido");
+                    output.setText("Extremely low libido");
                 }
 
 
@@ -88,15 +91,50 @@ public class input_lossoflibido extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Context context = getContext();
-                Toast.makeText(context, "Data Submitted for "+StringDate, Toast.LENGTH_SHORT).show();
+                String[] LastDateLine;
+                String LastDate=null;
+                List<String[]> File = null;
+
                 try {
-                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                    String Enter = Input.getValue() +"," + StringDate;
-                    String[] entries = Enter.split(",");
-                    writer.writeNext(entries);
-                    writer.close();
-                } catch(IOException ie) {
+                    CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t', '"', 0);
+                    File = reader.readAll();
+                    LastDateLine =File.get(File.size()-1);
+                    LastDate = LastDateLine[1];
+                } catch (IOException ie) {
                     ie.printStackTrace();
+                }
+
+
+
+                if (!(LastDate.equals(StringDate)))
+                {
+                    try {
+                        CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                        String Enter = Input.getValue() + "," + StringDate;
+                        String[] entries = Enter.split(",");
+                        writer.writeNext(entries);
+                        Toast.makeText(context, "Data Submitted for " + StringDate, Toast.LENGTH_SHORT).show();
+                        writer.close();
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
+                }
+                else
+                {
+                    try{
+                        CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
+                        File.remove(File.size()-1);
+                        writer.writeAll(File);
+                        writer.close();
+                        CSVWriter writer2 = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                        String Enter = Input.getValue() + "," + StringDate;
+                        String[] entries = Enter.split(",");
+                        writer2.writeNext(entries);
+                        writer2.close();
+                        Toast.makeText(context, "Data Resubmitted for " + StringDate, Toast.LENGTH_SHORT).show();
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
                 }
             }
         });

@@ -35,11 +35,14 @@ import trios.trio_f;
 
 public class Tab_b extends Fragment {
 
-    int previouspage;
-    ViewPager mPager;
     ViewPager inputPager;
     FragmentPagerAdapter adapterViewPager;
     FragmentPagerAdapter adapterViewPager2;
+
+    public void SetPage(int Pos){
+        inputPager.setCurrentItem(Pos, true);
+    }
+
 
     @Nullable
     @Override
@@ -53,7 +56,7 @@ public class Tab_b extends Fragment {
         final ViewPager viewPager2 = (ViewPager) Fragment.findViewById(R.id.InputSelector);
         adapterViewPager2 = new PagerAdapterInput(getChildFragmentManager());
         viewPager2.setAdapter(adapterViewPager2);
-
+        inputPager = viewPager2;
 //        Input_Energy input_energy = new Input_Energy();
 //        FragmentManager manager = getChildFragmentManager();
 //        manager.beginTransaction()
@@ -265,5 +268,6 @@ public class Tab_b extends Fragment {
         public int getCount() {
             return Num_Items;
         }
+
+        }
     }
-}

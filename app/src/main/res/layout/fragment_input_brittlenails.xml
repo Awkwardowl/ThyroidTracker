@@ -68,17 +68,14 @@
             android:id="@+id/button4"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="32dp"
             android:background="@color/GRAY"
             android:text="✓"
-            android:textSize="40dp"
             android:textColor="@color/LightGreen"
+            android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.693"
-            app:layout_constraintStart_toEndOf="@+id/Readout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.954" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
