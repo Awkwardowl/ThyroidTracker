@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -83,6 +85,25 @@ public class input_pinsandneedles extends android.support.v4.app.Fragment {
                 }
 
 
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Pins and needles");
+                alertDialog.setMessage("Over time the lack of thyroid hormone can cause damage to the nerves that send signals to the brain resulting in a sensation of pins and needles.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 

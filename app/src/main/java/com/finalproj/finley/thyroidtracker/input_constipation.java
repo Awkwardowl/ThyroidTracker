@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -82,6 +84,25 @@ public class input_constipation extends android.support.v4.app.Fragment {
                 }
 
 
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Constipation!");
+                alertDialog.setMessage("Irregular bowel movements can be a major indicator of hypothyroidism due the lack of thyroid hormone causing digestive function to slow down.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 

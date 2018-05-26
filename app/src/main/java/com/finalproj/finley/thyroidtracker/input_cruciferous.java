@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -82,6 +84,25 @@ public class input_cruciferous extends android.support.v4.app.Fragment {
                 }
 
 
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Cruciferous/Brassicas vegetables!");
+                alertDialog.setMessage("These are cauliflower, cabbage, garden cress, bok choy, broccoli, Brussels sprouts and similar green leaf vegetables.\n\nThese can contribute to Goitre however the levels need to be very high before this can be considered a significant risk.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 

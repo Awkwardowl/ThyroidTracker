@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -58,6 +60,25 @@ public class input_energy extends android.support.v4.app.Fragment {
         SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
         final String StringDate = sdf.format(new Date());
 
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Energy!");
+                alertDialog.setMessage("The hormonal imbalance can cause mood swings and depression.\nThis is a key indicator and whilst not always responsible is definitely worth getting checked by a doctor.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
         final CircleSeekBar Input = (CircleSeekBar) view.findViewById(R.id.circleSeekBar);
         final TextView output = (TextView) view.findViewById(R.id.Readout);
         Input.setValue(0);
@@ -66,15 +87,15 @@ public class input_energy extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("High Energy");
+                    output.setText("High energy level");
                 }
                 else if ( v > 25 && v <=50)
                 {
-                    output.setText("Below Normal");
+                    output.setText("Normal energy level");
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Reasonable energy level");
+                    output.setText("Below normal level");
                 }
                 else if ( v > 75 )
                 {

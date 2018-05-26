@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -83,6 +85,25 @@ public class input_lossoflibido extends android.support.v4.app.Fragment {
                 }
 
 
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Loss of libido!");
+                alertDialog.setMessage("A significant change in libido can be an indicator of a change in hormone levels in the body.\nCombined with other factors may make this worth checking out.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 

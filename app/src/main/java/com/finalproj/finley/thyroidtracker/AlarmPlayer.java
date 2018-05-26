@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
@@ -12,6 +13,10 @@ import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.opencsv.CSVReader;
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Calendar;
 
 import static android.content.ContentValues.TAG;
@@ -72,16 +77,48 @@ public class AlarmPlayer extends Service{
             Calendar date = Calendar.getInstance();
             int day = date.get(Calendar.DAY_OF_YEAR) ;
             Log.d(TAG, String.valueOf(day));
-            if (day%2==0)
-            {
-                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText("125mcg Levothyroxine").setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
-                notificationManager.notify(0, AlarmPopup);
-            } else {
-                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText("100mcg Levothyroxine").setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
-                notificationManager.notify(0, AlarmPopup);
+
+            String daily=null;
+            String alt=null;
+            String alternate=null;
+
+            try {
+                Context context = getApplicationContext();
+
+                CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + "/LastAlarm.csv"), '\t', '"', 0);
+                String[] nextline;
+
+
+
+                while ((nextline = reader.readNext()) != null) {
+                    if (nextline != null)
+                    {
+                            daily = nextline[2];
+                            alt = nextline[1];
+                            alternate = nextline[3];
+                    }
+
+                }
+            } catch (IOException ie) {
+                ie.printStackTrace();
             }
 
-
+            if(alternate.equals("true"))
+            {
+                if (day%2==0)
+                {
+                    Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText(daily).setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
+                    notificationManager.notify(0, AlarmPopup);
+                } else {
+                    Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText(alt).setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
+                    notificationManager.notify(0, AlarmPopup);
+                }
+            }
+            else
+            {
+                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText(daily).setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
+                notificationManager.notify(0, AlarmPopup);
+            }
 
         } else if (this.isRunning && startId == 0) {
 

@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -83,6 +85,25 @@ public class input_weakness extends android.support.v4.app.Fragment {
                 }
 
 
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Muscle weakness!");
+                alertDialog.setMessage("If your muscles are sore after minimal exertion you may be suffering from hypothyroid muscle weakness as they struggle to contract and stay contracted.\nHowever it may be worth checking that its not just the feeling of tiredness making it difficult to contract. ");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 

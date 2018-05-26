@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -66,7 +68,7 @@ public class input_thirst extends android.support.v4.app.Fragment {
             public void onValueChanged(int i) {
                 int v = Input.getValue();
                 if (v <= 25) {
-                    output.setText("Normal Thirst");
+                    output.setText("Normal thirst");
                 }
                 else if ( v > 25 && v <=50)
                 {
@@ -82,6 +84,25 @@ public class input_thirst extends android.support.v4.app.Fragment {
                 }
 
 
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Thirst!");
+                alertDialog.setMessage("Significantly increased thirst despite water consumption is a key indicator of either hypothyroidism or diabetes so is worth getting checked by a doctor ASAP.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 

@@ -29,6 +29,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -63,6 +64,16 @@ public class Tab_c extends Fragment {
         View Fragment = inflater.inflate(R.layout.tab_c, container, false);
         final Context context;
         context = getContext();
+
+        final Switch toggle = (Switch) Fragment.findViewById(R.id.switch1);
+        final TextView textView10 = (TextView)  Fragment.findViewById(R.id.textView10);
+        final TextView textView2 = (TextView)  Fragment.findViewById(R.id.textView2);
+        final EditText editText3 = (EditText) Fragment.findViewById(R.id.editText3);
+        final EditText editText2 = (EditText) Fragment.findViewById(R.id.editText2);
+        final TextView Output = (TextView) Fragment.findViewById(R.id.CurrentAlarm);
+
+        textView10.setEnabled(false);
+        editText3.setEnabled(false);
 
         String[] ResourceNames = getResources().getStringArray(R.array.LabsResultsTypes);
         for (String s: ResourceNames)
@@ -130,8 +141,47 @@ public class Tab_c extends Fragment {
                         Context context = getContext();
                         Toast.makeText(context, "Alarm set for: " + date + ":" + date2, Toast.LENGTH_SHORT).show();
 
-//                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000 * 60 * 20, alarmIntent);
-//                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
+
+
+                                try
+                                {
+                                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + "/LastAlarm.csv", false), '\t');
+                                    String Enter = "";
+                                    Enter = date+":"+date2+","+editText3.getText()+","+editText2.getText()+","+toggle.isChecked();
+                                    String[] entries = Enter.split(",");
+                                    writer.writeNext(entries);
+                                    writer.close();
+                                }
+                                catch(IOException ie)
+                                {
+                                    ie.printStackTrace();
+                                }
+
+
+
+                        try {
+
+                            CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + "/LastAlarm.csv"), '\t' ,'"',0);
+                            String[] nextline;
+
+                            while ((nextline = reader.readNext()) != null) {
+                                if (nextline != null) {
+                                    if(nextline[3].equals("false"))
+                                    {
+                                        Output.setText("Alarm set for " + nextline[0]+".\n" +"Daily: "+nextline[2]);
+                                    }
+                                    else
+                                    {
+                                        Output.setText("Alarm set for " + nextline[0]+".\n" +"Alternating: "+nextline[2]+"/"+nextline[1]);
+                                    }
+
+                                }
+
+                            }
+                        }catch(IOException ie) {
+                            ie.printStackTrace();
+                        }
+
                     }
 
 
@@ -143,6 +193,32 @@ public class Tab_c extends Fragment {
 
               }
         });
+
+        File f = new File("/LastAlarm.csv");
+        if(f.exists() && !f.isDirectory()) {
+            try {
+
+                CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + "/LastAlarm.csv"), '\t', '"', 0);
+                String[] nextline;
+
+                while ((nextline = reader.readNext()) != null) {
+                    if (nextline != null) {
+                        if (nextline[3].equals("false"))
+                        {
+                            Output.setText("Alarm set for " + nextline[0]+".\n" +"Daily: "+nextline[2]);
+                        }
+                        else
+                        {
+                            Output.setText("Alarm set for " + nextline[0]+".\n" +"Alternating: "+nextline[2]+"/"+nextline[1]);
+                        }
+
+                    }
+
+                }
+            } catch (IOException ie) {
+                ie.printStackTrace();
+            }
+        }
 
         final Button button2 = (Button) Fragment.findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener(){
@@ -185,6 +261,10 @@ public class Tab_c extends Fragment {
         graphView.addSeries(series);
         graphView.addSeries(series2);
         graphView.addSeries(series3);
+        series.setColor(getResources().getColor(android.R.color.holo_blue_dark));
+        series.setColor(getResources().getColor(android.R.color.holo_green_dark));
+        series.setColor(getResources().getColor(android.R.color.holo_red_dark));
+
 
         final EditText editText = (EditText) Fragment.findViewById(R.id.editText);
         final Button button3 = (Button) Fragment.findViewById(R.id.button3);
@@ -264,15 +344,9 @@ public class Tab_c extends Fragment {
             }
         });
 
-        final TextView textView10 = (TextView)  Fragment.findViewById(R.id.textView10);
-        final TextView textView2 = (TextView)  Fragment.findViewById(R.id.textView2);
-        final EditText editText3 = (EditText) Fragment.findViewById(R.id.editText3);
-        final EditText editText2 = (EditText) Fragment.findViewById(R.id.editText2);
-        textView10.setEnabled(false);
-        editText3.setEnabled(false);
 
 
-        final Switch toggle = (Switch) Fragment.findViewById(R.id.switch1);
+
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (toggle.isChecked())

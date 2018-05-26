@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -74,16 +76,36 @@ public class input_sleep extends android.support.v4.app.Fragment {
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("More than three");
+                    output.setText("More than three hours");
                 }
                 else if ( v > 75 )
                 {
-                    output.setText("Less than three");
+                    output.setText("Less than three hours");
                 }
 
 
             }
         });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Sleep!");
+                alertDialog.setMessage("Insomnia and oversleeping are both syptoms of hypothyroidism. The tiredness making it seem like a good idea to sleep during the day, whilst the hormonal imbalance stopping you from restful sleep.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
 
         Button Submit = (Button) view.findViewById(R.id.button4);
         Submit.setOnClickListener(new View.OnClickListener()  {

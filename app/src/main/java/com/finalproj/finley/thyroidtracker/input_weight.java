@@ -1,7 +1,9 @@
 package com.finalproj.finley.thyroidtracker;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -65,7 +67,26 @@ public class input_weight extends android.support.v4.app.Fragment {
         Input.setOnValueChangedListener(new CircleSeekBar.OnValueChangedListener() {
             @Override
             public void onValueChanged(int i) {
-                    output.setText(Input.getValue()+"Kg");
+                    output.setText(Input.getValue()+" KG");
+            }
+        });
+
+        Button Help = (Button) view.findViewById(R.id.help);
+        Help.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Weight gain/loss!");
+                alertDialog.setMessage("Rapid weight gain is a sure sign of hypothyroidism as your body doesn't burn the same level of calories as it normally would as well as retain excess water.\n\nDefinitely worth getting checked by a doctor if your weight increases rapidly despite no change in lifestyle.");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 
