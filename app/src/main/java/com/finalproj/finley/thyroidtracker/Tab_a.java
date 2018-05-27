@@ -1,5 +1,7 @@
 package com.finalproj.finley.thyroidtracker;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -106,7 +109,6 @@ public class Tab_a extends Fragment {
                     s = "PinsAndNeedles";
                 }
                 String FileName="/"+s+".csv";
-                Log.d(TAG, "xxxxxxxxxxxxxx"+FileName);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(new Date());
                 cal.add(Calendar.DATE, -91);
@@ -311,6 +313,333 @@ public class Tab_a extends Fragment {
 
         FirstView = false;
 
+        Button Rec = (Button) Fragment.findViewById(R.id.REC);
+        Rec.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                String output = "\n";
+                String[] ResourceNames2 = getResources().getStringArray(R.array.Resulttypes);
+                for (String s: ResourceNames2)
+                {
+                    try
+                    {
+                        if (s.equals("Loss of libido"))
+                        {
+                            s = "LossOfLibido";
+                        }
+                        if (s.equals("Pins and Needles"))
+                        {
+                            s = "PinsAndNeedles";
+                        }
+                        String FileName = "/" + s + ".csv";
+                        CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t', '"', 0);
+                        String[] nextline;
+                        int linecount=0;
+                        boolean flag = false;
+                        boolean outputted = false;
+                        int Count = 0;
+                        while ((nextline = reader.readNext()) != null)
+                        {
+                            if (nextline != null&&linecount>=70)
+                            {
+                                switch(s){
+                                    case "Activity":
+                                        if(Double.parseDouble(nextline[0])<40)
+                                        {
+
+                                            Count++;
+                                            if(Count>=8)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider increasing the amount of exercise you do.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Brainfog":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your brainfog.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Brittlenails":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing the brittleness of your hair/nails.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Cold":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your increased sensitivity to cold.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Constipation":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your bowel difficulties.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Cramps":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your cramps.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Cruciferous":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider reducing the amount of cruciferous vegetable consumption.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Depression":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your depression with them.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Energy":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your lack of energy.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Iodine":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider reducing your iodine consumption.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Loss of libido":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your loss of libido.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Pins and Needles":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your pins and needles.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Sleep":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your inability to sleep.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Soya":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider reducing your soya consumption.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Thirst":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your increased thirst.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Tiredness":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your lethargy/fatigue.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "Weakness":
+                                        if(Double.parseDouble(nextline[0])>60)
+                                        {
+
+                                            Count++;
+                                            if(Count>=12)
+                                            {
+                                                flag=true;
+                                                if (flag==true && outputted==false)
+                                                {
+                                                    output = output + "Consider visiting the doctor and discussing your muscle weakness.\n\n";
+                                                    outputted = true;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+                            linecount++;
+                        }
+
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
+                }
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Recommendations");
+                alertDialog.setMessage(output);
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
+        Log.d(TAG, "onCreateView: ");
         return Fragment;
     }
 
@@ -334,7 +663,6 @@ public class Tab_a extends Fragment {
 
             while ((nextline = reader.readNext()) != null) {
                 if (nextline != null) {
-                    Log.d(TAG, Arrays.toString(nextline)+"xxxxxxxx\n");
                     List.add(nextline);
                 }
 

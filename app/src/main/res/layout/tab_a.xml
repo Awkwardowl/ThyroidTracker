@@ -123,5 +123,15 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@android:color/holo_red_dark" />
 
+    <Button
+        android:id="@+id/REC"
+        android:layout_width="306dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="22dp"
+        android:text="Get recommendations"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
