@@ -40,6 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static android.Manifest.permission_group.CALENDAR;
 import static android.content.ContentValues.TAG;
 
 /**
@@ -130,6 +131,11 @@ public class Tab_c extends Fragment {
                         intent.putExtra("extra", true);
 
                         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        if (calendar.getTimeInMillis() < System.currentTimeMillis())
+                        {
+                            calendar.add(Calendar.DATE, 1);
+                        }
 
                         String date = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
                         String date2 = String.valueOf(calendar.get(Calendar.MINUTE));

@@ -64,7 +64,8 @@ public class AlarmPlayer extends Service{
             startId = 0;
         }
 
-        if (!this.isRunning && startId == 1) {
+        if (!this.isRunning && startId == 1)
+        {
             media_song = MediaPlayer.create(this, R.raw.kids);
             media_song.start();
             this.isRunning = true;

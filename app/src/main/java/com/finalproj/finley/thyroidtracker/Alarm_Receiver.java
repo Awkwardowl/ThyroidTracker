@@ -12,6 +12,9 @@ public class Alarm_Receiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        Toast toast = Toast.makeText(context, "Alarm received.", Toast.LENGTH_LONG);
+        toast.show();
+
         Log.d(TAG, "alarm received ");
 
         boolean flag = intent.getExtras().getBoolean("extra");
