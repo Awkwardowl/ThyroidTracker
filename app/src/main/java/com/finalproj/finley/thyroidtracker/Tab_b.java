@@ -46,7 +46,8 @@ public class Tab_b extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
+    {
         View Fragment = inflater.inflate(R.layout.tab_b, container, false);
 
         final ViewPager viewPager = (ViewPager) Fragment.findViewById(R.id.TypeSelector);
@@ -56,12 +57,7 @@ public class Tab_b extends Fragment {
         final ViewPager viewPager2 = (ViewPager) Fragment.findViewById(R.id.InputSelector);
         adapterViewPager2 = new PagerAdapterInput(getChildFragmentManager());
         viewPager2.setAdapter(adapterViewPager2);
-        inputPager = viewPager2;
-//        Input_Energy input_energy = new Input_Energy();
-//        FragmentManager manager = getChildFragmentManager();
-//        manager.beginTransaction()
-//                .replace(R.id.InputLayout, input_energy, input_energy.getTag())
-//                .commit();
+        inputPager = viewPager2; //Links the "inputPager" with the ViewPager2 allowing the SetPage function to be called by the child fragment in viewPager.
 
         viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -70,7 +66,7 @@ public class Tab_b extends Fragment {
             @Override
             public void onPageSelected(int position)
             {
-                viewPager.setCurrentItem((int) Math.floor(position/3));
+                viewPager.setCurrentItem((int) Math.floor(position/3)); //Keeps the upper viewpager in sync with the current shown lower fragment
             }
 
             @Override
@@ -78,31 +74,27 @@ public class Tab_b extends Fragment {
         });
 
 
-        Date date = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-//        Context context = getContext();
-//        Toast toast = Toast.makeText(context, date + "," + dayOfWeek, Toast.LENGTH_LONG);
-//        toast.show();
+        Date date = new Date(); //Gets current date and time
+        Calendar c = Calendar.getInstance(); //Creates an instance of calendar
+        c.setTime(date);//Sets the calendars time to be now
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK); //Gets the current day of the week as a number
 
-        Calendar now = Calendar.getInstance();
+        Calendar now = Calendar.getInstance(); //creates another instance of calendar
 
-        SimpleDateFormat format = new SimpleDateFormat("dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd"); //date format for the output
 
-        String[] days = new String[7];
-        int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; //add 2 if your week start on monday
-        now.add(Calendar.DAY_OF_MONTH, delta);
-        for (int i = 0; i < 7; i++) {
-            days[i] = format.format(now.getTime());
-            now.add(Calendar.DAY_OF_MONTH, 1);
+        String[] days = new String[7]; //Seven size array
+        int Day = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; //add 2 if your week start on monday
+        now.add(Calendar.DAY_OF_MONTH, Day); //Adds a day to the calendar.
+        for (int i = 0; i < 7; i++) //Iterates seven times to fill the current week
+        {
+            days[i] = format.format(now.getTime()); //Gets the time from the current calendar day in the pre determined format
+            now.add(Calendar.DAY_OF_MONTH, 1); //This iterates the calendar day
         }
-        System.out.println(Arrays.toString(days));
 
-
-        final TextView Sunday = (TextView) Fragment.findViewById(R.id.Sunday);
-        Sunday.setText(days[6]);
-        Sunday.setBackgroundColor(getResources().getColor(R.color.LightGreen));
+        final TextView Sunday = (TextView) Fragment.findViewById(R.id.Sunday); //Links the textview to the XML textview
+        Sunday.setText(days[6]); //sets the text of the textview
+        Sunday.setBackgroundColor(getResources().getColor(R.color.LightGreen)); //Sets the colour of the text view
 
         final TextView Monday = (TextView) Fragment.findViewById(R.id.Monday);
         Monday.setText(days[0]);
@@ -151,7 +143,6 @@ public class Tab_b extends Fragment {
                 Saturday.setBackgroundColor(getResources().getColor(R.color.HighlightGreen));
                 break;
         }
-
         return Fragment;
     }
 

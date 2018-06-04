@@ -2,7 +2,6 @@ package com.finalproj.finley.thyroidtracker;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,25 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     NonSwipeableViewPager mViewPager;
-//    ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // initialises the menu; this adds items to the action bar.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -124,9 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            //This creates and returns a copy of the fragment that is responsible for the
+            //viewpager to display to the user.
             switch (position){
                 case 0:
                     Tab_a tab_a = new Tab_a();
+
                     return tab_a;
                 case 1:
                     Tab_b tab_b = new Tab_b();

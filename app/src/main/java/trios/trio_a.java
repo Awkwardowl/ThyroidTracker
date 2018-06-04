@@ -45,9 +45,9 @@ public class trio_a extends Fragment {
         button1.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                Tab_b fragment = (Tab_b)getParentFragment();
-                fragment.SetPage(0);
+                FragmentManager fm = getFragmentManager(); //Initialises fragment manager
+                Tab_b fragment = (Tab_b)getParentFragment(); //Gets parent fragment and links it to a arbitrary fragment variable
+                fragment.SetPage(0); //Calls the function passing it the page number to be changed to.
             }
         });
 

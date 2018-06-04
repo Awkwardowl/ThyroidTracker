@@ -50,13 +50,19 @@ import static android.content.ContentValues.TAG;
 public class Tab_c extends Fragment {
     int hour;
     int minute;
+    boolean FirstView = true;
+
     AlarmManager alarmManager;
     PendingIntent alarmIntent;
+
     TimePickerDialog timePickerDialog;
+
     GraphView graphView;
+
     LineGraphSeries<DataPoint> series;
     LineGraphSeries<DataPoint> series2;
     LineGraphSeries<DataPoint> series3;
+
     SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
 
     @Nullable
@@ -76,35 +82,39 @@ public class Tab_c extends Fragment {
         textView10.setEnabled(false);
         editText3.setEnabled(false);
 
-        String[] ResourceNames = getResources().getStringArray(R.array.LabsResultsTypes);
-        for (String s: ResourceNames)
+        if (FirstView == true)
         {
-            try
+            String[] ResourceNames = getResources().getStringArray(R.array.LabsResultsTypes);
+            for (String s: ResourceNames)
             {
-                String FileName="/"+s+".csv";
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(new Date());
-                cal.add(Calendar.DATE, -91);
-                Date TempDate;
-                String DateString;
-
-                CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
-                for (int i=1; i<=3; i++)
+                try
                 {
-                    cal.add(Calendar.DATE, 30);
-                    TempDate = cal.getTime();
-                    DateString = sdf.format(TempDate);
-                    String Enter = "";
-                    Enter = Math.ceil(20+Math.random()*50)+","+ DateString;
-                    String[] entries = Enter.split(",");
-                    writer.writeNext(entries);
-                }
-                writer.close();
-            } catch(IOException ie) {
-                ie.printStackTrace();
-            }
-        }
+                    String FileName="/"+s+".csv";
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(new Date());
+                    cal.add(Calendar.DATE, -91);
+                    Date TempDate;
+                    String DateString;
 
+                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
+                    for (int i=1; i<=3; i++)
+                    {
+                        cal.add(Calendar.DATE, 30);
+                        TempDate = cal.getTime();
+                        DateString = sdf.format(TempDate);
+                        String Enter = "";
+                        Enter = Math.ceil(20+Math.random()*50)+","+ DateString;
+                        String[] entries = Enter.split(",");
+                        writer.writeNext(entries);
+                    }
+                    writer.close();
+                } catch(IOException ie) {
+                    ie.printStackTrace();
+                }
+            }
+
+        }
+        FirstView = false;
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         final Intent intent = new Intent(context, Alarm_Receiver.class);
 
@@ -121,35 +131,34 @@ public class Tab_c extends Fragment {
 
                 timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        Log.d(TAG,selectedHour + ":" + selectedMinute);
-                        hour = selectedHour;
-                        minute = selectedMinute;
-                        calendar.set(Calendar.HOUR_OF_DAY, hour);
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) { //Creates the dialog
+
+                        hour = selectedHour; //Gets current hour
+                        minute = selectedMinute; //Current minute
+                        calendar.set(Calendar.HOUR_OF_DAY, hour); //Set the calendar to now using previous data.
                         calendar.set(Calendar.MINUTE, minute);
 
-                        intent.putExtra("extra", true);
+                        intent.putExtra("extra", true); //modifies the intent to contain extra data.
 
-                        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT); //Creates a pending intent using the data from the intent
 
                         if (calendar.getTimeInMillis() < System.currentTimeMillis())
                         {
-                            calendar.add(Calendar.DATE, 1);
+                            calendar.add(Calendar.DATE, 1); //Stops the alarm going off instantly if the time has already based. Means it goes off then next day instead.
                         }
 
-                        String date = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
+                        String date = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)); //Creates stingg of the hour and the minute.
                         String date2 = String.valueOf(calendar.get(Calendar.MINUTE));
 
-                        Log.d(TAG, date + ":" + date2);
-
-                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,alarmIntent);
+                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,alarmIntent); //Creates a repeating alarm using hte pending intent created earlier.
 
                         Context context = getContext();
-                        Toast.makeText(context, "Alarm set for: " + date + ":" + date2, Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(context, "Alarm set for: " + date + ":" + date2, Toast.LENGTH_SHORT).show(); //Notifies the user the alarm has been set.
 
 
 
-                                try
+                                try //Writes the just set alarm to file along with the text for it to display on alarm sounding.
                                 {
                                     CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + "/LastAlarm.csv", false), '\t');
                                     String Enter = "";
@@ -165,7 +174,7 @@ public class Tab_c extends Fragment {
 
 
 
-                        try {
+                        try { //Loads the data from file regarding the alarm, and writes this to the user so they know what text will occur at what time.
 
                             CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + "/LastAlarm.csv"), '\t' ,'"',0);
                             String[] nextline;
@@ -193,15 +202,13 @@ public class Tab_c extends Fragment {
 
 
                 }, hour, minute, true);
-                timePickerDialog.setTitle("Select Alarm Time:");
-                timePickerDialog.show();
-
-
+                timePickerDialog.setTitle("Select Alarm Time:"); //adds a title to the time picker dialog
+                timePickerDialog.show(); //Shows the time picker dialog.
               }
         });
 
         File f = new File("/LastAlarm.csv");
-        if(f.exists() && !f.isDirectory()) {
+//        if(f.exists() && !f.isDirectory()) {
             try {
 
                 CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + "/LastAlarm.csv"), '\t', '"', 0);
@@ -224,7 +231,7 @@ public class Tab_c extends Fragment {
             } catch (IOException ie) {
                 ie.printStackTrace();
             }
-        }
+//        }
 
         final Button button2 = (Button) Fragment.findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener(){
@@ -245,6 +252,7 @@ public class Tab_c extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
 
 
         graphView=(GraphView) Fragment.findViewById(R.id.graph2);
@@ -268,8 +276,8 @@ public class Tab_c extends Fragment {
         graphView.addSeries(series2);
         graphView.addSeries(series3);
         series.setColor(getResources().getColor(android.R.color.holo_blue_dark));
-        series.setColor(getResources().getColor(android.R.color.holo_green_dark));
-        series.setColor(getResources().getColor(android.R.color.holo_red_dark));
+        series2.setColor(getResources().getColor(android.R.color.holo_green_dark));
+        series3.setColor(getResources().getColor(android.R.color.holo_red_dark));
 
 
         final EditText editText = (EditText) Fragment.findViewById(R.id.editText);
@@ -281,7 +289,6 @@ public class Tab_c extends Fragment {
                 final String StringDate = sdf.format(new Date());
 
                 String Type = String.valueOf(spinner.getSelectedItem());
-                Double data = Double.valueOf(editText.getText().toString());
 
                 Log.d("D",Type);
 
@@ -290,6 +297,12 @@ public class Tab_c extends Fragment {
                 String LastDate=null;
                 List<String[]> File = null;
                 final String FileName = "/" + Type + ".csv";
+                if(editText.getText().toString()==null || editText.getText().toString().equals(""))
+                {
+
+                }
+                else
+                {
                     try
                     {
                         CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t', '"', 0);
@@ -302,36 +315,39 @@ public class Tab_c extends Fragment {
 
 
 
-                    if (!(LastDate.equals(StringDate)))
-                    {
-                        try {
-                            CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                            String Enter = editText.getText() + "," + StringDate;
-                            String[] entries = Enter.split(",");
-                            writer.writeNext(entries);
-                            Toast.makeText(context, Type+" data Submitted for " + StringDate, Toast.LENGTH_SHORT).show();
-                            writer.close();
-                        } catch (IOException ie) {
-                            ie.printStackTrace();
+
+                        if (!(LastDate.equals(StringDate)))
+                        {
+                            try {
+                                CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                                String Enter = editText.getText() + "," + StringDate;
+                                String[] entries = Enter.split(",");
+                                writer.writeNext(entries);
+                                Toast.makeText(context, Type+" data Submitted for " + StringDate, Toast.LENGTH_SHORT).show();
+                                writer.close();
+                            } catch (IOException ie) {
+                                ie.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            try{
+                                CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
+                                File.remove(File.size()-1);
+                                writer.writeAll(File);
+                                writer.close();
+                                CSVWriter writer2 = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
+                                String Enter = editText.getText() + "," + StringDate;
+                                String[] entries = Enter.split(",");
+                                writer2.writeNext(entries);
+                                writer2.close();
+                                Toast.makeText(context, Type+" data Resubmitted for " + StringDate, Toast.LENGTH_SHORT).show();
+                            } catch (IOException ie) {
+                                ie.printStackTrace();
+                            }
                         }
                     }
-                    else
-                    {
-                        try{
-                            CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
-                            File.remove(File.size()-1);
-                            writer.writeAll(File);
-                            writer.close();
-                            CSVWriter writer2 = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, true), '\t');
-                            String Enter = editText.getText() + "," + StringDate;
-                            String[] entries = Enter.split(",");
-                            writer2.writeNext(entries);
-                            writer2.close();
-                            Toast.makeText(context, Type+" data Resubmitted for " + StringDate, Toast.LENGTH_SHORT).show();
-                        } catch (IOException ie) {
-                            ie.printStackTrace();
-                        }
-                    }
+
 
                 graphView.removeAllSeries();
 

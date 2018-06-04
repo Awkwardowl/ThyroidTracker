@@ -76,7 +76,7 @@ public class input_cruciferous extends android.support.v4.app.Fragment {
                 }
                 else if ( v > 50 && v <= 75)
                 {
-                    output.setText("Nearly daily allowance");
+                    output.setText("Near daily allowance");
                 }
                 else if ( v > 75 )
                 {

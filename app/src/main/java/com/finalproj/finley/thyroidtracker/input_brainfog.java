@@ -94,7 +94,7 @@ public class input_brainfog extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                 alertDialog.setTitle("Brainfog and mental clarity!");
-                alertDialog.setMessage("Symptoms include:\n   Difficulty concentrating\n   Forgetfulness\n   Confusion\n   Memory problems\n   Feeling spaced out\n   Lack of focus");
+                alertDialog.setMessage("Symptoms include:\nDifficulty concentrating\nForgetfulness\nConfusion\nMemory problems\nFeeling spaced out\nLack of focus");
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

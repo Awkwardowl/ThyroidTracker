@@ -3,12 +3,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,28 +14,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
-
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
@@ -51,41 +39,51 @@ public class Tab_a extends Fragment {
 
     Boolean FirstView = true;
 
+    Boolean Check1 = true;
+    Boolean Check2 = true;
+    Boolean Check3 = true;
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && !FirstView) {
             graphView.removeAllSeries();
+            if(Check1){
+                series=new LineGraphSeries<>(getDataPoint(spinner.getSelectedItem().toString()));
+                series.setColor(getResources().getColor(android.R.color.holo_blue_dark));
+                graphView.addSeries(series);
 
-            series=new LineGraphSeries<>(getDataPoint(spinner.getSelectedItem().toString()));
-            series.setColor(getResources().getColor(android.R.color.holo_blue_dark));
-            graphView.addSeries(series);
+            }
+            if(Check2){
 
-            series2=new LineGraphSeries<>(getDataPoint(spinner2.getSelectedItem().toString()));
-            series2.setColor(getResources().getColor(android.R.color.holo_green_dark));
-            graphView.addSeries(series2);
+                series2=new LineGraphSeries<>(getDataPoint(spinner2.getSelectedItem().toString()));
+                series2.setColor(getResources().getColor(android.R.color.holo_green_dark));
+                graphView.addSeries(series2);
+            }
+            if(Check3)
+            {
 
-            series3=new LineGraphSeries<>(getDataPoint(spinner3.getSelectedItem().toString()));
-            series3.setColor(getResources().getColor(android.R.color.holo_red_dark));
-            graphView.addSeries(series3);
-
+                series3=new LineGraphSeries<>(getDataPoint(spinner3.getSelectedItem().toString()));
+                series3.setColor(getResources().getColor(android.R.color.holo_red_dark));
+                graphView.addSeries(series3);
+            }
             graphView.getViewport().scrollToEnd();
         }
     }
 
     GraphView graphView;
+
     LineGraphSeries<DataPoint> series;
     LineGraphSeries<DataPoint> series2;
     LineGraphSeries<DataPoint> series3;
+
     Date d1;
+
     Spinner spinner;
     Spinner spinner2;
     Spinner spinner3;
 
-
     SimpleDateFormat sdf= new SimpleDateFormat("dd/MM");
-
-
 
     @Nullable
     @Override
@@ -95,51 +93,55 @@ public class Tab_a extends Fragment {
         final Context context;
         context = getContext();
 
-        String[] ResourceNames = getResources().getStringArray(R.array.Resulttypes);
-        for (String s: ResourceNames)
-        {
-            try
-            {
-                if (s.equals("Loss of libido"))
-                {
-                    s = "LossOfLibido";
-                }
-                if (s.equals("Pins and Needles"))
-                {
-                    s = "PinsAndNeedles";
-                }
-                String FileName="/"+s+".csv";
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(new Date());
-                cal.add(Calendar.DATE, -91);
-                Date TempDate;
-                String DateString;
+        if(FirstView == true) {
+            String[] ResourceNames = getResources().getStringArray(R.array.Resulttypes);
+            for (String s : ResourceNames) {
+                try {
 
-                Double LastVal =Math.ceil(20+Math.random()*50);
+                    if (s.equals("Loss of libido")) {
+                        s = "LossOfLibido";
+                    }
+                    if (s.equals("Pins and Needles")) {
+                        s = "PinsAndNeedles";
+                    }
 
-                CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
-                for (int i=1; i<=90; i++)
-                {
-                    cal.add(Calendar.DATE, 1);
-                    TempDate = cal.getTime();
-                    DateString = sdf.format(TempDate);
-                    String Enter = "";
-                    LastVal = LastVal + (Math.ceil(Math.random()*20)-10);
-                    if (LastVal > 99)
-                    {
-                        LastVal = LastVal-11;
+                    String FileName = "/" + s + ".csv";
+                    String DateString;
+
+                    Date TempDate;
+
+                    Calendar cal = Calendar.getInstance();
+
+                    cal.setTime(new Date());
+                    cal.add(Calendar.DATE, -91);
+
+                    Double LastVal = Math.ceil(20 + Math.random() * 50);
+
+                    CSVWriter writer = new CSVWriter(new FileWriter(context.getFilesDir().getPath().toString() + FileName, false), '\t');
+
+                    for (int i = 1; i <= 90; i++) {
+                        cal.add(Calendar.DATE, 1);
+                        TempDate = cal.getTime();
+                        DateString = sdf.format(TempDate);
+                        String Enter = "";
+                        LastVal = LastVal + (Math.ceil(Math.random() * 20) - 10);
+
+                        if (LastVal > 99) {
+                            LastVal = LastVal - 11;
+                        }
+
+                        if (LastVal < 1) {
+                            LastVal = LastVal + 11;
+                        }
+
+                        Enter = LastVal + "," + DateString;
+                        String[] entries = Enter.split(",");
+                        writer.writeNext(entries);
                     }
-                    if (LastVal < 1)
-                    {
-                        LastVal = LastVal+11;
-                    }
-                    Enter = LastVal +","+ DateString;
-                    String[] entries = Enter.split(",");
-                    writer.writeNext(entries);
+                    writer.close();
+                } catch (IOException ie) {
+                    ie.printStackTrace();
                 }
-                writer.close();
-            } catch(IOException ie) {
-                ie.printStackTrace();
             }
         }
 
@@ -175,11 +177,13 @@ public class Tab_a extends Fragment {
                     spinner.setEnabled(true);
                     imageview1.setEnabled(true);
                     graphView.addSeries(series);
+                    Check1 = true;
 
                 }else{
                     imageview1.setEnabled(false);
                     spinner.setEnabled(false);
                     graphView.removeSeries(series);
+                    Check1 = false;
                 }
             }
         });
@@ -193,10 +197,12 @@ public class Tab_a extends Fragment {
                     imageview2.setEnabled(true);
                     spinner2.setEnabled(true);
                     graphView.addSeries(series2);
+                    Check2 = true;
                 }else{
                     imageview2.setEnabled(false);
                     spinner2.setEnabled(false);
                     graphView.removeSeries(series2);
+                    Check2 = false;
                 }
             }
         });
@@ -210,10 +216,12 @@ public class Tab_a extends Fragment {
                     imageview3.setEnabled(true);
                     spinner3.setEnabled(true);
                     graphView.addSeries(series3);
+                    Check3 = true;
                 }else{
                     imageview3.setEnabled(false);
                     spinner3.setEnabled(false);
                     graphView.removeSeries(series3);
+                    Check3 = false;
                 }
             }
         });
@@ -225,21 +233,18 @@ public class Tab_a extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                graphView.removeSeries(series);
-                if (spinner != null && spinner.getSelectedItem()!= null ){
-                    Log.d(TAG, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+spinner.getSelectedItem().toString());
-                    series=new LineGraphSeries<>(getDataPoint(spinner.getSelectedItem().toString()));
-                    series.setColor(getResources().getColor(android.R.color.holo_blue_dark));
-                    graphView.addSeries(series);
+                graphView.removeSeries(series); //Removes the current series if it exists
+                if (spinner != null && spinner.getSelectedItem()!= null ) //Ensures spinner has something selected
+                {
+                    series=new LineGraphSeries<>(getDataPoint(spinner.getSelectedItem().toString())); //Gets the selected csvs data points
+                    series.setColor(getResources().getColor(android.R.color.holo_blue_dark)); //Sets the colour of the series
+                    graphView.addSeries(series); //Adds the series to the graph
 
                 } else {
                 }
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -319,12 +324,13 @@ public class Tab_a extends Fragment {
 
             @Override
             public void onClick(View v) {
-                String output = "\n";
-                String[] ResourceNames2 = getResources().getStringArray(R.array.Resulttypes);
-                for (String s: ResourceNames2)
+                String output = "\n"; //Initialises the string as a line return character
+                String[] ResourceNames2 = getResources().getStringArray(R.array.Resulttypes); //gets an array of all possible strings for the input
+                for (String s: ResourceNames2) //Iterates over the list of strings
                 {
                     try
                     {
+                        //Corrects the input strings to be the usable strings
                         if (s.equals("Loss of libido"))
                         {
                             s = "LossOfLibido";
@@ -333,30 +339,46 @@ public class Tab_a extends Fragment {
                         {
                             s = "PinsAndNeedles";
                         }
-                        String FileName = "/" + s + ".csv";
+                        String FileName = "/" + s + ".csv";//Turns string into file path
+
+                        //Creates the file reader used to get the data.
                         CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t', '"', 0);
                         String[] nextline;
-                        int linecount=0;
-                        boolean flag = false;
+                        int linecount=0;//Initialises the line reader as 0.
                         boolean outputted = false;
                         int Count = 0;
-                        while ((nextline = reader.readNext()) != null)
+                        int NumLines = 0;
+
+                        try {
+
+                            //Opens the reader using the filepath
+                            CSVReader reader2 = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t' ,'"',0);
+                            //Gets a single line of the csv and iterates until the line run out
+                            while ((nextline = reader.readNext()) != null) {
+                                if (nextline != null) {
+                                    NumLines++;
+                                }
+                            }
+                        }catch(IOException ie) {
+                            ie.printStackTrace();
+                        }
+
+                        while ((nextline = reader.readNext()) != null) //Iterates over each line until the lines run out
                         {
-                            if (nextline != null&&linecount>=70)
+                            if (nextline != null&&linecount>=NumLines-20) //For every line which isn't the last line and is in the last 20 days.
                             {
-                                switch(s){
-                                    case "Activity":
-                                        if(Double.parseDouble(nextline[0])<40)
+                                switch(s){ //Case statement passed the string from the array of possible strings
+                                    case "Activity": //For this string
+                                        if(Double.parseDouble(nextline[0])<40) //if the value is less than 40
                                         {
 
-                                            Count++;
-                                            if(Count>=8)
+                                            Count++; //Count increases
+                                            if(Count>=8) //If count is greater than 8
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
+                                                if (outputted==false) //If it hasn't already outputted.
                                                 {
-                                                    output = output + "Consider increasing the amount of exercise you do.\n\n";
-                                                    outputted = true;
+                                                    output = output + "Consider increasing the amount of exercise you do.\n\n"; //Adds a string to the output string
+                                                    outputted = true; //Flags as already outputted.
                                                 }
                                             }
                                         }
@@ -368,8 +390,7 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
+                                                if (outputted==false)
                                                 {
                                                     output = output + "Consider visiting the doctor and discussing your brainfog.\n\n";
                                                     outputted = true;
@@ -384,9 +405,7 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing the brittleness of your hair/nails.\n\n";
                                                     outputted = true;
                                                 }
@@ -400,9 +419,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your increased sensitivity to cold.\n\n";
                                                     outputted = true;
                                                 }
@@ -416,9 +434,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your bowel difficulties.\n\n";
                                                     outputted = true;
                                                 }
@@ -432,9 +449,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your cramps.\n\n";
                                                     outputted = true;
                                                 }
@@ -448,9 +464,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider reducing the amount of cruciferous vegetable consumption.\n\n";
                                                     outputted = true;
                                                 }
@@ -464,9 +479,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your depression with them.\n\n";
                                                     outputted = true;
                                                 }
@@ -480,9 +494,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your lack of energy.\n\n";
                                                     outputted = true;
                                                 }
@@ -496,9 +509,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider reducing your iodine consumption.\n\n";
                                                     outputted = true;
                                                 }
@@ -512,9 +524,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your loss of libido.\n\n";
                                                     outputted = true;
                                                 }
@@ -528,9 +539,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your pins and needles.\n\n";
                                                     outputted = true;
                                                 }
@@ -544,9 +554,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider visiting the doctor and discussing your inability to sleep.\n\n";
                                                     outputted = true;
                                                 }
@@ -560,9 +569,7 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
-                                                {
+                                                if (outputted==false)                                                {
                                                     output = output + "Consider reducing your soya consumption.\n\n";
                                                     outputted = true;
                                                 }
@@ -576,8 +583,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
+
+                                                if (outputted==false)
                                                 {
                                                     output = output + "Consider visiting the doctor and discussing your increased thirst.\n\n";
                                                     outputted = true;
@@ -592,8 +599,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
+
+                                                if (outputted==false)
                                                 {
                                                     output = output + "Consider visiting the doctor and discussing your lethargy/fatigue.\n\n";
                                                     outputted = true;
@@ -608,8 +615,8 @@ public class Tab_a extends Fragment {
                                             Count++;
                                             if(Count>=12)
                                             {
-                                                flag=true;
-                                                if (flag==true && outputted==false)
+
+                                                if (outputted==false)
                                                 {
                                                     output = output + "Consider visiting the doctor and discussing your muscle weakness.\n\n";
                                                     outputted = true;
@@ -639,12 +646,13 @@ public class Tab_a extends Fragment {
             }
         });
 
-        Log.d(TAG, "onCreateView: ");
         return Fragment;
     }
 
     private DataPoint[] getDataPoint(String File) {
         Context context = getContext();
+
+        //Converts the passed string into the filename for the two exceptions.
         if (File.equals("Loss of libido"))
         {
             File = "LossOfLibido";
@@ -653,36 +661,40 @@ public class Tab_a extends Fragment {
         {
             File = "PinsAndNeedles";
         }
+
+        //Constructs the file path from the string
         String FileName="/" + File+".csv";
         ArrayList<String[]> List = new ArrayList<>();
 
         try {
 
+            //Opens the reader using the filepath
             CSVReader reader = new CSVReader(new FileReader(context.getFilesDir().getPath().toString() + FileName), '\t' ,'"',0);
             String[] nextline;
 
+            //Gets a single line of the csv and iterates until the line run out
             while ((nextline = reader.readNext()) != null) {
                 if (nextline != null) {
-                    List.add(nextline);
+                    List.add(nextline); //Adds a line to the arraylist
                 }
 
             }
         }catch(IOException ie) {
             ie.printStackTrace();
         }
-        DataPoint[] dp = new DataPoint[List.size()];
+        DataPoint[] dp = new DataPoint[List.size()]; //Creates a appropriately sized array of data points
 
 
         for(int i = 0; i<List.size();i++)
             try {
-                String[] Temp = List.get(i);
-                Date date = sdf.parse(Temp[1]);
-                DataPoint D = new DataPoint(date.getTime(),Double.parseDouble(Temp[0]));
-                dp[i] = D;
+                String[] Temp = List.get(i); //Gets a single line
+                Date date = sdf.parse(Temp[1]); //Parses the string into date format. "DD/mm"
+                DataPoint D = new DataPoint(date.getTime(),Double.parseDouble(Temp[0])); //Creates a new data point using the parsed date and the data from the line.
+                dp[i] = D; //Adds the point ot the array of points
             } catch (java.text.ParseException e) {
                 e.printStackTrace();
             }
-        return dp;
+        return dp; //Returns the array of datapoints
     }
 
 

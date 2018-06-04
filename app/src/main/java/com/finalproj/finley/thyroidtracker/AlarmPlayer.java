@@ -45,10 +45,6 @@ public class AlarmPlayer extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand: ");
-
-
-
 
         boolean flag = intent.getExtras().getBoolean("extra");
 
@@ -64,20 +60,20 @@ public class AlarmPlayer extends Service{
             startId = 0;
         }
 
-        if (!this.isRunning && startId == 1)
+        if (!this.isRunning && startId == 1) //Alarm not running and should be playing
         {
-            media_song = MediaPlayer.create(this, R.raw.kids);
-            media_song.start();
+            media_song = MediaPlayer.create(this, R.raw.kids); //Creates a media player
+            media_song.start(); //Starts the media player
             this.isRunning = true;
             startId = 0;
 
+            //Creates the notification manager and sets the context to allow the user to be notified regarding what to take.
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             Intent intent_Tab_c = new Intent(this.getApplicationContext(), Tab_c.class);
             PendingIntent pendingIntent_main_actvity = PendingIntent.getActivity(this, 0, intent_Tab_c,0);
 
             Calendar date = Calendar.getInstance();
             int day = date.get(Calendar.DAY_OF_YEAR) ;
-            Log.d(TAG, String.valueOf(day));
 
             String daily=null;
             String alt=null;
@@ -104,41 +100,59 @@ public class AlarmPlayer extends Service{
                 ie.printStackTrace();
             }
 
-            if(alternate.equals("true"))
+            if(alternate.equals("true")) //For each alternate day
             {
-                if (day%2==0)
+                if (day%2==0) //for each even calendar day
                 {
-                    Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText(daily).setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
+                    Notification AlarmPopup = new Notification.Builder(this)
+                            .setContentTitle("Take your Medication")
+                            .setContentText(daily) //Normal Notification
+                            .setContentIntent(pendingIntent_main_actvity)
+                            .setAutoCancel(true)
+                            .setSmallIcon(R.drawable.thyroidlogo)
+                            .build();
+
                     notificationManager.notify(0, AlarmPopup);
-                } else {
-                    Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText(alt).setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
+                } else { //every odd day
+                    Notification AlarmPopup = new Notification.Builder(this)
+                            .setContentTitle("Take your Medication")
+                            .setContentText(alt)    //Alt notification
+                            .setContentIntent(pendingIntent_main_actvity)
+                            .setAutoCancel(true)
+                            .setSmallIcon(R.drawable.thyroidlogo)
+                            .build();
+
                     notificationManager.notify(0, AlarmPopup);
                 }
             }
-            else
+            else //For every day
             {
-                Notification AlarmPopup = new Notification.Builder(this).setContentTitle("Take your Medication").setContentText(daily).setContentIntent(pendingIntent_main_actvity).setAutoCancel(true).setSmallIcon(R.drawable.thyroidlogo).build();
+                Notification AlarmPopup = new Notification.Builder(this)
+                        .setContentTitle("Take your Medication")
+                        .setContentText(daily) //Normal Notification
+                        .setContentIntent(pendingIntent_main_actvity)
+                        .setAutoCancel(true)
+                        .setSmallIcon(R.drawable.thyroidlogo)
+                        .build();
+
                 notificationManager.notify(0, AlarmPopup);
             }
 
-        } else if (this.isRunning && startId == 0) {
-
+        }
+        else if (this.isRunning && startId == 0) //Is running and stop pressed
+        {
             media_song.stop();
             media_song.reset();
-
             this.isRunning = false;
             startId = 0;
-
-
-        } else if (!this.isRunning && startId == 0) {
-
+        }
+        else if (!this.isRunning && startId == 0) //Not running and stop pressed.
+        {
             this.isRunning = false;
             startId = 0;
-
-
-        } else if (this.isRunning && startId == 1) {
-
-
+        }
+        else if (this.isRunning && startId == 1)  //Is runining and set pressed.
+        {
             this.isRunning = true;
             startId = 1;
 

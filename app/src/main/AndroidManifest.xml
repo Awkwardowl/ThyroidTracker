@@ -22,8 +22,7 @@
 
         <receiver  android:name=".Alarm_Receiver"/>
 
-        <service android:name=".AlarmPlayer"
-            android:enabled="true"></service>
+        <service android:name=".AlarmPlayer" android:enabled="true"></service>
 
     </application>
 
